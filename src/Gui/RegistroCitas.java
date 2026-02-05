@@ -197,6 +197,7 @@ public class RegistroCitas extends JFrame {
 		contentPane.add(btnLimpiar);
 		
 		JButton btnSalir = new JButton("Salir / Volver");
+		btnSalir.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/salida.png")));
 		btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
 		btnSalir.setBackground(SystemColor.inactiveCaptionText);
 		btnSalir.setBounds(621, 14, 150, 30);
