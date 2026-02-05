@@ -75,9 +75,9 @@ public class Login extends JFrame {
 		lblIcono.setBounds(0, 0, 42, 36);
 		contentPane.add(lblIcono);
 		
-		JLabel lblTitulo2 = new JLabel("Hospital");
+		JLabel lblTitulo2 = new JLabel("Hospital Hermilio");
 		lblTitulo2.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		lblTitulo2.setBounds(47, 11, 64, 14);
+		lblTitulo2.setBounds(47, 11, 172, 14);
 		contentPane.add(lblTitulo2);
 		
 		JLabel lblTitulo3 = new JLabel("INICIAR SESION");

@@ -5,11 +5,29 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JSeparator;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.border.LineBorder;
+import java.awt.SystemColor;
+import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RegistroCitas extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTextField txtNcita;
+	private JTextField txtEstado;
+	private JTextField txtfecha;
+	private JTextField txtHora;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -32,11 +50,157 @@ public class RegistroCitas extends JFrame {
 	 */
 	public RegistroCitas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 797, 586);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Hospital Hermilio");
+		lblNewLabel.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
+		lblNewLabel.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/icon.png")));
+		lblNewLabel.setBounds(10, 11, 160, 35);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblCita = new JLabel("N° Cita");
+		lblCita.setBounds(20, 60, 34, 14);
+		contentPane.add(lblCita);
+		
+		txtNcita = new JTextField();
+		txtNcita.setBackground(SystemColor.scrollbar);
+		txtNcita.setEnabled(false);
+		txtNcita.setEditable(false);
+		txtNcita.setBounds(67, 57, 100, 20);
+		contentPane.add(txtNcita);
+		txtNcita.setColumns(10);
+		
+		JLabel lblPaciente = new JLabel("Paciente");
+		lblPaciente.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/user.png")));
+		lblPaciente.setBounds(203, 57, 64, 17);
+		contentPane.add(lblPaciente);
+		
+		JLabel lblMedico = new JLabel("Medico");
+		lblMedico.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/user-md.png")));
+		lblMedico.setBounds(496, 58, 64, 18);
+		contentPane.add(lblMedico);
+		
+		JSeparator separator1 = new JSeparator();
+		separator1.setBounds(20, 121, 359, 2);
+		contentPane.add(separator1);
+		
+		JLabel lblOtrosDatos = new JLabel("Otros Datos");
+		lblOtrosDatos.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/menu-dots.png")));
+		lblOtrosDatos.setBounds(20, 104, 100, 14);
+		contentPane.add(lblOtrosDatos);
+		
+		JLabel lblConsultorio = new JLabel("Consultorio");
+		lblConsultorio.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/building-user.png")));
+		lblConsultorio.setBounds(20, 134, 100, 24);
+		contentPane.add(lblConsultorio);
+		
+		JComboBox cbpaciente = new JComboBox();
+		cbpaciente.setBounds(277, 56, 200, 20);
+		contentPane.add(cbpaciente);
+		
+		JComboBox cbmedico = new JComboBox();
+		cbmedico.setBounds(554, 56, 200, 20);
+		contentPane.add(cbmedico);
+		
+		JComboBox cbconsultorio = new JComboBox();
+		cbconsultorio.setBackground(SystemColor.scrollbar);
+		cbconsultorio.setBounds(20, 169, 200, 20);
+		contentPane.add(cbconsultorio);
+		
+		JLabel lblEstado = new JLabel("Estado");
+		lblEstado.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/punto-pendiente.png")));
+		lblEstado.setBounds(279, 134, 76, 24);
+		contentPane.add(lblEstado);
+		
+		txtEstado = new JTextField();
+		txtEstado.setBackground(SystemColor.scrollbar);
+		txtEstado.setEditable(false);
+		txtEstado.setBounds(277, 169, 150, 20);
+		contentPane.add(txtEstado);
+		txtEstado.setColumns(10);
+		
+		JSeparator separator2 = new JSeparator();
+		separator2.setBounds(20, 236, 359, 2);
+		contentPane.add(separator2);
+		
+		JLabel lblHorario = new JLabel(" Horario");
+		lblHorario.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/calendar.png")));
+		lblHorario.setBounds(20, 211, 64, 20);
+		contentPane.add(lblHorario);
+		
+		JLabel lblFecha = new JLabel("Fecha");
+		lblFecha.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/calendario.png")));
+		lblFecha.setBounds(20, 249, 81, 25);
+		contentPane.add(lblFecha);
+		
+		txtfecha = new JTextField();
+		txtfecha.setBackground(SystemColor.scrollbar);
+		txtfecha.setBounds(20, 280, 200, 20);
+		contentPane.add(txtfecha);
+		txtfecha.setColumns(10);
+		
+		JLabel lblHora = new JLabel("Hora");
+		lblHora.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/reloj.png")));
+		lblHora.setBounds(257, 249, 58, 25);
+		contentPane.add(lblHora);
+		
+		txtHora = new JTextField();
+		txtHora.setBackground(SystemColor.scrollbar);
+		txtHora.setColumns(10);
+		txtHora.setBounds(255, 280, 200, 20);
+		contentPane.add(txtHora);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(20, 330, 696, 164);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setBorder(new LineBorder(SystemColor.desktop));
+		
+		JButton btnNuevo = new JButton("Nuevo");
+		btnNuevo.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
+		btnNuevo.setBackground(SystemColor.inactiveCaptionText);
+		btnNuevo.setBounds(30, 505, 125, 25);
+		contentPane.add(btnNuevo);
+		
+		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
+		btnGuardar.setBackground(SystemColor.inactiveCaptionText);
+		btnGuardar.setBounds(165, 505, 125, 25);
+		contentPane.add(btnGuardar);
+		
+		JButton btnModificar = new JButton("Modificar");
+		btnModificar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnModificar.setBackground(SystemColor.inactiveCaptionText);
+		btnModificar.setBounds(300, 505, 125, 25);
+		contentPane.add(btnModificar);
+		
+		JButton btnCancelarCita = new JButton("Cancelar Cita");
+		btnCancelarCita.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
+		btnCancelarCita.setBackground(SystemColor.inactiveCaptionText);
+		btnCancelarCita.setBounds(435, 505, 125, 25);
+		contentPane.add(btnCancelarCita);
+		
+		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
+		btnLimpiar.setBackground(SystemColor.inactiveCaptionText);
+		btnLimpiar.setBounds(570, 504, 125, 25);
+		contentPane.add(btnLimpiar);
+		
+		JButton btnSalir = new JButton("Salir / Volver");
+		btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
+		btnSalir.setBackground(SystemColor.inactiveCaptionText);
+		btnSalir.setBounds(621, 14, 150, 30);
+		contentPane.add(btnSalir);
 
 	}
-
 }
