@@ -18,8 +18,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.UIManager;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
-public class Mantenimiento extends JFrame {
+public class FRMMantenimiento extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -55,7 +56,7 @@ public class Mantenimiento extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Mantenimiento frame = new Mantenimiento();
+					FRMMantenimiento frame = new FRMMantenimiento();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,7 +68,9 @@ public class Mantenimiento extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Mantenimiento() {
+	public FRMMantenimiento() {
+		setTitle("Mantenimiento");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FRMMantenimiento.class.getResource("/IMG/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 628, 962);
 		contentPane = new JPanel();
@@ -76,13 +79,14 @@ public class Mantenimiento extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblTitulo1 = new JLabel("Hospital Hermilio");
+		lblTitulo1.setForeground(new Color(0, 128, 128));
 		lblTitulo1.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
-		lblTitulo1.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/icon.png")));
+		lblTitulo1.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/icon.png")));
 		lblTitulo1.setBounds(10, 11, 160, 35);
 		contentPane.add(lblTitulo1);
 		
 		JLabel lblsubTitulo1 = new JLabel("Mantenimiento Pacientes");
-		lblsubTitulo1.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/settings (2).png")));
+		lblsubTitulo1.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/settings (2).png")));
 		lblsubTitulo1.setFont(new Font("Yu Gothic", Font.BOLD, 14));
 		lblsubTitulo1.setBounds(20, 60, 222, 27);
 		contentPane.add(lblsubTitulo1);
@@ -190,7 +194,7 @@ public class Mantenimiento extends JFrame {
 		txtBuscar1.setColumns(10);
 		
 		JButton btnBuscar1 = new JButton("Buscar");
-		btnBuscar1.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/busqueda.png")));
+		btnBuscar1.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/busqueda.png")));
 		btnBuscar1.setBackground(SystemColor.inactiveCaptionText);
 		btnBuscar1.setBounds(417, 244, 89, 23);
 		contentPane.add(btnBuscar1);
@@ -205,7 +209,7 @@ public class Mantenimiento extends JFrame {
 		contentPane.add(lblConsulta1);
 		
 		JLabel lblsubTitulo2 = new JLabel("Mantenimiento Medico");
-		lblsubTitulo2.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/settings (2).png")));
+		lblsubTitulo2.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/settings (2).png")));
 		lblsubTitulo2.setFont(new Font("Yu Gothic", Font.BOLD, 14));
 		lblsubTitulo2.setBounds(10, 381, 197, 27);
 		contentPane.add(lblsubTitulo2);
@@ -215,25 +219,25 @@ public class Mantenimiento extends JFrame {
 		contentPane.add(separator_1);
 		
 		JButton btnAgregar1 = new JButton("Agregar");
-		btnAgregar1.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/agregar.png")));
+		btnAgregar1.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/agregar.png")));
 		btnAgregar1.setBackground(SystemColor.inactiveCaptionText);
 		btnAgregar1.setBounds(35, 309, 100, 23);
 		contentPane.add(btnAgregar1);
 		
 		JButton btnModificar1 = new JButton("Modificar");
-		btnModificar1.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
+		btnModificar1.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
 		btnModificar1.setBackground(SystemColor.inactiveCaptionText);
 		btnModificar1.setBounds(154, 309, 100, 23);
 		contentPane.add(btnModificar1);
 		
 		JButton btnEliminar1 = new JButton("Eliminar");
-		btnEliminar1.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/cruz-pequena.png")));
+		btnEliminar1.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/cruz-pequena.png")));
 		btnEliminar1.setBackground(SystemColor.inactiveCaptionText);
 		btnEliminar1.setBounds(264, 309, 100, 23);
 		contentPane.add(btnEliminar1);
 		
 		JButton btnGrabar1 = new JButton("Grabar");
-		btnGrabar1.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
+		btnGrabar1.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
 		btnGrabar1.setBackground(SystemColor.inactiveCaptionText);
 		btnGrabar1.setBounds(379, 309, 100, 23);
 		contentPane.add(btnGrabar1);
@@ -313,7 +317,7 @@ public class Mantenimiento extends JFrame {
 		contentPane.add(txtBuscar2);
 		
 		JButton btnBuscar2 = new JButton("Buscar");
-		btnBuscar2.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/busqueda.png")));
+		btnBuscar2.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/busqueda.png")));
 		btnBuscar2.setBackground(SystemColor.inactiveCaptionText);
 		btnBuscar2.setBounds(417, 570, 89, 23);
 		contentPane.add(btnBuscar2);
@@ -328,31 +332,31 @@ public class Mantenimiento extends JFrame {
 		contentPane.add(tableMedico);
 		
 		JButton btnAgregar2 = new JButton("Agregar");
-		btnAgregar2.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/agregar.png")));
+		btnAgregar2.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/agregar.png")));
 		btnAgregar2.setBackground(SystemColor.inactiveCaptionText);
 		btnAgregar2.setBounds(35, 627, 100, 23);
 		contentPane.add(btnAgregar2);
 		
 		JButton btnModificar2 = new JButton("Modificar");
-		btnModificar2.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
+		btnModificar2.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
 		btnModificar2.setBackground(SystemColor.inactiveCaptionText);
 		btnModificar2.setBounds(154, 627, 100, 23);
 		contentPane.add(btnModificar2);
 		
 		JButton btnEliminar2 = new JButton("Eliminar");
-		btnEliminar2.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/cruz-pequena.png")));
+		btnEliminar2.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/cruz-pequena.png")));
 		btnEliminar2.setBackground(SystemColor.inactiveCaptionText);
 		btnEliminar2.setBounds(264, 627, 100, 23);
 		contentPane.add(btnEliminar2);
 		
 		JButton btnGrabar2 = new JButton("Grabar");
-		btnGrabar2.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
+		btnGrabar2.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
 		btnGrabar2.setBackground(SystemColor.inactiveCaptionText);
 		btnGrabar2.setBounds(379, 627, 100, 23);
 		contentPane.add(btnGrabar2);
 		
 		JLabel lblsubTitulo3 = new JLabel("Mantenimiento Consultorio");
-		lblsubTitulo3.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/settings (2).png")));
+		lblsubTitulo3.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/settings (2).png")));
 		lblsubTitulo3.setFont(new Font("Yu Gothic", Font.BOLD, 14));
 		lblsubTitulo3.setBounds(10, 686, 232, 27);
 		contentPane.add(lblsubTitulo3);
@@ -412,7 +416,7 @@ public class Mantenimiento extends JFrame {
 		contentPane.add(txtBuscar3);
 		
 		JButton btnBuscar3 = new JButton("Buscar");
-		btnBuscar3.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/busqueda.png")));
+		btnBuscar3.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/busqueda.png")));
 		btnBuscar3.setBackground(SystemColor.inactiveCaptionText);
 		btnBuscar3.setBounds(445, 829, 89, 23);
 		contentPane.add(btnBuscar3);
@@ -423,50 +427,50 @@ public class Mantenimiento extends JFrame {
 		contentPane.add(tableConsultorio);
 		
 		JButton btnAgregar3 = new JButton("Agregar");
-		btnAgregar3.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/agregar.png")));
+		btnAgregar3.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/agregar.png")));
 		btnAgregar3.setBackground(SystemColor.inactiveCaptionText);
 		btnAgregar3.setBounds(35, 883, 100, 23);
 		contentPane.add(btnAgregar3);
 		
 		JButton btnModificar3 = new JButton("Modificar");
-		btnModificar3.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
+		btnModificar3.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
 		btnModificar3.setBackground(SystemColor.inactiveCaptionText);
 		btnModificar3.setBounds(154, 883, 100, 23);
 		contentPane.add(btnModificar3);
 		
 		JButton btnEliminar3 = new JButton("Eliminar");
-		btnEliminar3.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/cruz-pequena.png")));
+		btnEliminar3.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/cruz-pequena.png")));
 		btnEliminar3.setBackground(SystemColor.inactiveCaptionText);
 		btnEliminar3.setBounds(264, 883, 100, 23);
 		contentPane.add(btnEliminar3);
 		
 		JButton btnGrabar3 = new JButton("Grabar");
-		btnGrabar3.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
+		btnGrabar3.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
 		btnGrabar3.setBackground(SystemColor.inactiveCaptionText);
 		btnGrabar3.setBounds(379, 883, 100, 23);
 		contentPane.add(btnGrabar3);
 		
 		JButton btnSalir = new JButton("Salir / Volver");
 		btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
-		btnSalir.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/salida.png")));
+		btnSalir.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/salida.png")));
 		btnSalir.setBackground(SystemColor.inactiveCaptionText);
 		btnSalir.setBounds(467, 30, 135, 35);
 		contentPane.add(btnSalir);
 		
 		JButton btnLimpiar1 = new JButton("Limpiar");
-		btnLimpiar1.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/escoba.png")));
+		btnLimpiar1.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/escoba.png")));
 		btnLimpiar1.setBackground(SystemColor.inactiveCaptionText);
 		btnLimpiar1.setBounds(488, 309, 100, 23);
 		contentPane.add(btnLimpiar1);
 		
 		JButton btnLimpiar3 = new JButton("Limpiar");
-		btnLimpiar3.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/escoba.png")));
+		btnLimpiar3.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/escoba.png")));
 		btnLimpiar3.setBackground(SystemColor.inactiveCaptionText);
 		btnLimpiar3.setBounds(488, 883, 100, 23);
 		contentPane.add(btnLimpiar3);
 		
 		JButton btnLimpiar2 = new JButton("Limpiar");
-		btnLimpiar2.setIcon(new ImageIcon(Mantenimiento.class.getResource("/IMG/escoba.png")));
+		btnLimpiar2.setIcon(new ImageIcon(FRMMantenimiento.class.getResource("/IMG/escoba.png")));
 		btnLimpiar2.setBackground(SystemColor.inactiveCaptionText);
 		btnLimpiar2.setBounds(488, 627, 100, 23);
 		contentPane.add(btnLimpiar2);

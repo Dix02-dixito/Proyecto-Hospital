@@ -18,8 +18,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
+import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
 
-public class RegistroCitas extends JFrame {
+public class FRMRegistroCitas extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -27,7 +30,7 @@ public class RegistroCitas extends JFrame {
 	private JTextField txtEstado;
 	private JTextField txtfecha;
 	private JTextField txtHora;
-	private JTable table;
+	private JTable tbldatosModificados;
 
 	/**
 	 * Launch the application.
@@ -36,7 +39,7 @@ public class RegistroCitas extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RegistroCitas frame = new RegistroCitas();
+					FRMRegistroCitas frame = new FRMRegistroCitas();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,17 +51,20 @@ public class RegistroCitas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegistroCitas() {
+	public FRMRegistroCitas() {
+		setTitle("Registro de Citas");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FRMRegistroCitas.class.getResource("/IMG/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 797, 586);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Hospital Hermilio");
+		lblNewLabel.setForeground(new Color(0, 128, 128));
 		lblNewLabel.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
-		lblNewLabel.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/icon.png")));
+		lblNewLabel.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/icon.png")));
 		lblNewLabel.setBounds(10, 11, 160, 35);
 		contentPane.add(lblNewLabel);
 		
@@ -75,12 +81,12 @@ public class RegistroCitas extends JFrame {
 		txtNcita.setColumns(10);
 		
 		JLabel lblPaciente = new JLabel("Paciente");
-		lblPaciente.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/user.png")));
+		lblPaciente.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/user.png")));
 		lblPaciente.setBounds(203, 57, 64, 17);
 		contentPane.add(lblPaciente);
 		
 		JLabel lblMedico = new JLabel("Medico");
-		lblMedico.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/user-md.png")));
+		lblMedico.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/user-md.png")));
 		lblMedico.setBounds(496, 58, 64, 18);
 		contentPane.add(lblMedico);
 		
@@ -89,12 +95,12 @@ public class RegistroCitas extends JFrame {
 		contentPane.add(separator1);
 		
 		JLabel lblOtrosDatos = new JLabel("Otros Datos");
-		lblOtrosDatos.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/menu-dots.png")));
+		lblOtrosDatos.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/menu-dots.png")));
 		lblOtrosDatos.setBounds(20, 104, 100, 14);
 		contentPane.add(lblOtrosDatos);
 		
 		JLabel lblConsultorio = new JLabel("Consultorio");
-		lblConsultorio.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/building-user.png")));
+		lblConsultorio.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/building-user.png")));
 		lblConsultorio.setBounds(20, 134, 100, 24);
 		contentPane.add(lblConsultorio);
 		
@@ -112,7 +118,7 @@ public class RegistroCitas extends JFrame {
 		contentPane.add(cbconsultorio);
 		
 		JLabel lblEstado = new JLabel("Estado");
-		lblEstado.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/punto-pendiente.png")));
+		lblEstado.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/punto-pendiente.png")));
 		lblEstado.setBounds(279, 134, 76, 24);
 		contentPane.add(lblEstado);
 		
@@ -128,12 +134,12 @@ public class RegistroCitas extends JFrame {
 		contentPane.add(separator2);
 		
 		JLabel lblHorario = new JLabel(" Horario");
-		lblHorario.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/calendar.png")));
+		lblHorario.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/calendar.png")));
 		lblHorario.setBounds(20, 211, 64, 20);
 		contentPane.add(lblHorario);
 		
 		JLabel lblFecha = new JLabel("Fecha");
-		lblFecha.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/calendario.png")));
+		lblFecha.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/calendario.png")));
 		lblFecha.setBounds(20, 249, 81, 25);
 		contentPane.add(lblFecha);
 		
@@ -144,7 +150,7 @@ public class RegistroCitas extends JFrame {
 		txtfecha.setColumns(10);
 		
 		JLabel lblHora = new JLabel("Hora");
-		lblHora.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/reloj.png")));
+		lblHora.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/reloj.png")));
 		lblHora.setBounds(257, 249, 58, 25);
 		contentPane.add(lblHora);
 		
@@ -155,12 +161,43 @@ public class RegistroCitas extends JFrame {
 		contentPane.add(txtHora);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 330, 696, 164);
+		scrollPane.setBounds(20, 342, 696, 152);
 		contentPane.add(scrollPane);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		table.setBorder(new LineBorder(SystemColor.desktop));
+		tbldatosModificados = new JTable();
+		tbldatosModificados.setRowSelectionAllowed(false);
+		tbldatosModificados.setEnabled(false);
+		tbldatosModificados.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+			},
+			new String[] {
+				"N\u00B0 Cita", "Paciente", "Medico", "Consultorio", "Fecha", "Hora", "Estado"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class, Object.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		scrollPane.setViewportView(tbldatosModificados);
+		tbldatosModificados.setBorder(new LineBorder(SystemColor.desktop));
 		
 		JButton btnNuevo = new JButton("Nuevo");
 		btnNuevo.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
@@ -197,11 +234,19 @@ public class RegistroCitas extends JFrame {
 		contentPane.add(btnLimpiar);
 		
 		JButton btnSalir = new JButton("Salir / Volver");
-		btnSalir.setIcon(new ImageIcon(RegistroCitas.class.getResource("/IMG/salida.png")));
+		btnSalir.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/salida.png")));
 		btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
 		btnSalir.setBackground(SystemColor.inactiveCaptionText);
 		btnSalir.setBounds(621, 14, 150, 30);
 		contentPane.add(btnSalir);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(10, 44, 258, 2);
+		contentPane.add(separator);
+		
+		JLabel lblDatosModificados = new JLabel("Datos Modificados:");
+		lblDatosModificados.setBounds(30, 311, 110, 14);
+		contentPane.add(lblDatosModificados);
 
 	}
 }

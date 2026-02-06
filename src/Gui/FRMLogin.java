@@ -19,8 +19,9 @@ import java.awt.Button;
 import java.awt.SystemColor;
 import javax.swing.DropMode;
 import javax.swing.JButton;
+import java.awt.Toolkit;
 
-public class Login extends JFrame {
+public class FRMLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -33,7 +34,7 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login frame = new Login();
+					FRMLogin frame = new FRMLogin();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +46,9 @@ public class Login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Login() {
+	public FRMLogin() {
+		setTitle("Inicio de Sesion");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FRMLogin.class.getResource("/IMG/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 430);
 		contentPane = new JPanel();
@@ -61,17 +64,17 @@ public class Login extends JFrame {
 		contentPane.add(lblTitulo1);
 		
 		JLabel lblLogo = new JLabel("New label");
-		lblLogo.setIcon(new ImageIcon(Login.class.getResource("/img/logo (1).png")));
+		lblLogo.setIcon(new ImageIcon(FRMLogin.class.getResource("/img/logo (1).png")));
 		lblLogo.setBounds(370, 11, 151, 143);
 		contentPane.add(lblLogo);
 		
 		JLabel lblBackground = new JLabel("New label");
-		lblBackground.setIcon(new ImageIcon(Login.class.getResource("/img/city.png")));
+		lblBackground.setIcon(new ImageIcon(FRMLogin.class.getResource("/img/city.png")));
 		lblBackground.setBounds(314, 0, 270, 394);
 		contentPane.add(lblBackground);
 		
 		JLabel lblIcono = new JLabel("New label");
-		lblIcono.setIcon(new ImageIcon(Login.class.getResource("/img/icon.png")));
+		lblIcono.setIcon(new ImageIcon(FRMLogin.class.getResource("/img/icon.png")));
 		lblIcono.setBounds(0, 0, 42, 36);
 		contentPane.add(lblIcono);
 		
@@ -86,7 +89,7 @@ public class Login extends JFrame {
 		contentPane.add(lblTitulo3);
 		
 		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setIcon(new ImageIcon(Login.class.getResource("/IMG/user.png")));
+		lblUsuario.setIcon(new ImageIcon(FRMLogin.class.getResource("/IMG/user.png")));
 		lblUsuario.setFont(new Font("Sitka Text", Font.BOLD, 15));
 		lblUsuario.setBounds(10, 103, 101, 20);
 		contentPane.add(lblUsuario);
@@ -101,7 +104,7 @@ public class Login extends JFrame {
 		txtIngreseSuUsuario.setColumns(10);
 		
 		JLabel lblContraseña = new JLabel("Contraseña");
-		lblContraseña.setIcon(new ImageIcon(Login.class.getResource("/IMG/password-protection (1).png")));
+		lblContraseña.setIcon(new ImageIcon(FRMLogin.class.getResource("/IMG/password-protection (1).png")));
 		lblContraseña.setFont(new Font("Sitka Text", Font.BOLD, 15));
 		lblContraseña.setBounds(10, 186, 131, 26);
 		contentPane.add(lblContraseña);
@@ -119,7 +122,7 @@ public class Login extends JFrame {
 		contentPane.add(separator);
 		
 		JButton btnIngresar = new JButton("Ingresar");
-		btnIngresar.setIcon(new ImageIcon(Login.class.getResource("/IMG/shield-check (1).png")));
+		btnIngresar.setIcon(new ImageIcon(FRMLogin.class.getResource("/IMG/shield-check (1).png")));
 		btnIngresar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 15));
 		btnIngresar.setBackground(SystemColor.inactiveCaptionText);
 		btnIngresar.setBounds(10, 281, 119, 36);
