@@ -200,18 +200,21 @@ public class FRMRegistroCitas extends JFrame {
 		tbldatosModificados.setBorder(new LineBorder(SystemColor.desktop));
 		
 		JButton btnNuevo = new JButton("Nuevo");
+		btnNuevo.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/agregar.png")));
 		btnNuevo.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
 		btnNuevo.setBackground(SystemColor.inactiveCaptionText);
 		btnNuevo.setBounds(30, 505, 125, 25);
 		contentPane.add(btnNuevo);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
 		btnGuardar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
 		btnGuardar.setBackground(SystemColor.inactiveCaptionText);
 		btnGuardar.setBounds(165, 505, 125, 25);
 		contentPane.add(btnGuardar);
 		
 		JButton btnModificar = new JButton("Modificar");
+		btnModificar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
 		btnModificar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -222,15 +225,21 @@ public class FRMRegistroCitas extends JFrame {
 		contentPane.add(btnModificar);
 		
 		JButton btnCancelarCita = new JButton("Cancelar Cita");
+		btnCancelarCita.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/cruz-pequena.png")));
 		btnCancelarCita.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
 		btnCancelarCita.setBackground(SystemColor.inactiveCaptionText);
-		btnCancelarCita.setBounds(435, 505, 125, 25);
+		btnCancelarCita.setBounds(435, 505, 146, 25);
 		contentPane.add(btnCancelarCita);
 		
 		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/escoba.png")));
+		btnLimpiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnLimpiar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
 		btnLimpiar.setBackground(SystemColor.inactiveCaptionText);
-		btnLimpiar.setBounds(570, 504, 125, 25);
+		btnLimpiar.setBounds(591, 505, 125, 25);
 		contentPane.add(btnLimpiar);
 		
 		JButton btnSalir = new JButton("Salir / Volver");
