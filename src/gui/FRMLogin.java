@@ -49,8 +49,7 @@ public class FRMLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		// ====== TITULOS Y LOGOS ======
-
+		//  TITULOS Y LOGOS 
 		JLabel lblTitulo1 = new JLabel("Hospital Hermilio");
 		lblTitulo1.setForeground(new Color(255, 255, 255));
 		lblTitulo1.setFont(new Font("Times New Roman", Font.BOLD, 30));
@@ -82,8 +81,7 @@ public class FRMLogin extends JFrame {
 		lblTitulo3.setBounds(10, 56, 200, 20);
 		contentPane.add(lblTitulo3);
 
-		// ====== USUARIO ======
-
+		// USUARIO 
 		JLabel lblUsuario = new JLabel("Usuario");
 		lblUsuario.setIcon(new ImageIcon(FRMLogin.class.getResource("/IMG/user.png")));
 		lblUsuario.setFont(new Font("Sitka Text", Font.BOLD, 15));
@@ -97,7 +95,7 @@ public class FRMLogin extends JFrame {
 		txtUsuario.setBounds(10, 134, 231, 25);
 		contentPane.add(txtUsuario);
 
-		// ====== CONTRASEÑA ======
+		//  CONTRASEÑA 
 
 		JLabel lblContraseña = new JLabel("Contraseña");
 		lblContraseña.setIcon(new ImageIcon(FRMLogin.class.getResource("/IMG/password-protection (1).png")));
@@ -115,7 +113,7 @@ public class FRMLogin extends JFrame {
 		separator.setBounds(10, 257, 294, 2);
 		contentPane.add(separator);
 
-		// ====== BOTON INGRESAR ======
+		//  BOTON INGRESAR 
 
 		JButton btnIngresar = new JButton("Ingresar");
 		btnIngresar.setIcon(new ImageIcon(FRMLogin.class.getResource("/IMG/shield-check (1).png")));
@@ -151,7 +149,7 @@ public class FRMLogin extends JFrame {
 		});
 	}
 
-	// ====== METODOS ======
+	//  METODOS 
 
 	private boolean validarCampos() {
 
@@ -177,7 +175,7 @@ public class FRMLogin extends JFrame {
 
 	private boolean autenticar(String usuario, String password) {
 
-		// demo
+		// USUARIO DEMO
 		String userDemo = "admin";
 		String passDemo = "1234";
 

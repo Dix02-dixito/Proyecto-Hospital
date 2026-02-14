@@ -54,6 +54,12 @@ public class FRMPrincipal extends JFrame {
 		bg.setLayout(null);
 		
 		JButton btnMantenimiento = new JButton("Mantenimiento");
+		btnMantenimiento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FRMMantenimientoPaciente mantenimiento = new FRMMantenimientoPaciente();
+		        mantenimiento.setVisible(true);
+			}
+		});
 		btnMantenimiento.setIcon(new ImageIcon(FRMPrincipal.class.getResource("/IMG/settings (2).png")));
 		btnMantenimiento.setBackground(SystemColor.inactiveCaptionText);
 		btnMantenimiento.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
@@ -66,12 +72,20 @@ public class FRMPrincipal extends JFrame {
 		btnConsulta.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
 		btnConsulta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				 FRMConsulta consulta = new FRMConsulta();
+			     consulta.setVisible(true);
 			}
 		});
 		btnConsulta.setBounds(30, 167, 140, 40);
 		bg.add(btnConsulta);
 		
 		JButton btnRegistro = new JButton("Registro");
+		btnRegistro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FRMRegistroCitas registro = new FRMRegistroCitas();
+				registro.setVisible(true);
+			}
+		});
 		btnRegistro.setBackground(SystemColor.inactiveCaptionText);
 		btnRegistro.setIcon(new ImageIcon(FRMPrincipal.class.getResource("/IMG/user-add.png")));
 		btnRegistro.setSelectedIcon(new ImageIcon(FRMPrincipal.class.getResource("/IMG/icon.png")));
@@ -80,6 +94,12 @@ public class FRMPrincipal extends JFrame {
 		bg.add(btnRegistro);
 		
 		JButton btnReporte = new JButton("Reporte");
+		btnReporte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 FRMReporte reporte = new FRMReporte();
+			     reporte.setVisible(true);
+			}
+		});
 		btnReporte.setIcon(new ImageIcon(FRMPrincipal.class.getResource("/IMG/exclamation.png")));
 		btnReporte.setBackground(SystemColor.inactiveCaptionText);
 		btnReporte.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
@@ -87,6 +107,12 @@ public class FRMPrincipal extends JFrame {
 		bg.add(btnReporte);
 		
 		JButton btnAyuda = new JButton("Ayuda");
+		btnAyuda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 FRMAyuda ayuda = new FRMAyuda();
+			        ayuda.setVisible(true);
+			}
+		});
 		btnAyuda.setIcon(new ImageIcon(FRMPrincipal.class.getResource("/IMG/headset.png")));
 		btnAyuda.setBackground(SystemColor.inactiveCaptionText);
 		btnAyuda.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
