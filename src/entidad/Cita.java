@@ -1,4 +1,4 @@
-package Entidad;
+package entidad;
 
 public class Cita {
 	//class private
