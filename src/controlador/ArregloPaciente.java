@@ -19,7 +19,7 @@ public class ArregloPaciente {
         // inicializar correlativo
         correlativo = 1001;
 
-        // (Opcional) datos de prueba
+        // datos de prueba
         adicionar(new Paciente(generarCodigo(), "Luis", "Ramirez",
                 "12345678", 25, "+51987654321",
                 "luis@gmail.com", 1));

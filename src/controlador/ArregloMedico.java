@@ -19,7 +19,7 @@ public class ArregloMedico {
         // inicializar correlativo
         correlativo = 501;
 
-        // (Opcional) datos de prueba
+        // datos de prueba
         adicionar(new Medico(generarCodigo(), "Carlos", "Lopez",
                 "Cardiología", "CMP12345", 1));
 

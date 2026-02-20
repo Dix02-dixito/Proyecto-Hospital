@@ -322,7 +322,7 @@ public class FRMMantenimientoPaciente extends JFrame {
 		
 		btnModificar1.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
 		btnModificar1.setBackground(SystemColor.inactiveCaptionText);
-		btnModificar1.setBounds(33, 309, 100, 23);
+		btnModificar1.setBounds(143, 309, 100, 23);
 		contentPane.add(btnModificar1);
 		
 		//boton eliminar
@@ -387,7 +387,7 @@ public class FRMMantenimientoPaciente extends JFrame {
 		});
 		btnEliminar1.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/cruz-pequena.png")));
 		btnEliminar1.setBackground(SystemColor.inactiveCaptionText);
-		btnEliminar1.setBounds(290, 309, 100, 23);
+		btnEliminar1.setBounds(369, 309, 100, 23);
 		contentPane.add(btnEliminar1);
 		//boton grabar osea guardar cambios xd
 		JButton btnGrabar1 = new JButton("Grabar");
@@ -463,7 +463,7 @@ public class FRMMantenimientoPaciente extends JFrame {
 			});
 		btnGrabar1.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
 		btnGrabar1.setBackground(SystemColor.inactiveCaptionText);
-		btnGrabar1.setBounds(163, 309, 100, 23);
+		btnGrabar1.setBounds(259, 309, 100, 23);
 		contentPane.add(btnGrabar1);
 		//Boton para volver a la ventana principal
 		JButton btnSalir = new JButton("Salir / Volver");
@@ -510,7 +510,7 @@ public class FRMMantenimientoPaciente extends JFrame {
 		});
 		btnLimpiar1.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/escoba.png")));
 		btnLimpiar1.setBackground(SystemColor.inactiveCaptionText);
-		btnLimpiar1.setBounds(414, 309, 100, 23);
+		btnLimpiar1.setBounds(488, 309, 100, 23);
 		contentPane.add(btnLimpiar1);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -653,6 +653,12 @@ public class FRMMantenimientoPaciente extends JFrame {
 		txtCorreo1.setEnabled(false);
 		txtEstado1.setEnabled(false);
 		txtCodigo.setEnabled(false);
+		
+		JButton btnAgregar = new JButton("Nuevo");
+		btnAgregar.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/agregar.png")));
+		btnAgregar.setBackground(SystemColor.inactiveCaptionText);
+		btnAgregar.setBounds(33, 309, 100, 23);
+		contentPane.add(btnAgregar);
 		
 		
 

@@ -16,7 +16,7 @@ public class ArregloCita {
         cit = new ArrayList<Cita>();
         correlativo = 1;
 
-        // Datos de prueba (opcional)
+        // Datos de prueba 
         adicionar(new Cita(generarNumero(), 1001, 501,
                 301, "15/02/2026",
                 "10:00", 0, "Control"));

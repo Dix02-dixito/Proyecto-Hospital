@@ -19,7 +19,7 @@ public class ArregloConsultorio {
         // inicializar correlativo
         correlativo = 301;
 
-        // (Opcional) datos de prueba
+        //  datos de prueba
         adicionar(new Consultorio(generarCodigo(), "C-305",
                 3, "Torre A – Ala Sur", 1, 1));
 
