@@ -30,6 +30,8 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
+import dao.PacienteDAO;
 
 import controlador.ArregloPaciente;
 import java.awt.event.ActionListener;
@@ -50,7 +52,7 @@ public class FRMMantenimientoPaciente extends JFrame {
 	private JTextField txtBuscar1;
 	private JTable table;
 	//Arraylist
-	private ArregloPaciente ap;
+	private PacienteDAO ap = new PacienteDAO();
 	
 	//metodo validacion de campos vacios
 	private boolean validarCampos() {
@@ -564,76 +566,78 @@ public class FRMMantenimientoPaciente extends JFrame {
 		txtBuscar1.setBackground(SystemColor.scrollbar);
 		txtBuscar1.setColumns(10);
 		
-		//boton buscar
+		//boton buscar con base de datos
 		JButton btnBuscar1 = new JButton("Buscar");
 		btnBuscar1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//codigo del boton buscar
 
-				String valor = txtBuscar1.getText().trim();
+			    String valor = txtBuscar1.getText().trim();
 
-				if (valor.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Ingrese dato para buscar");
-					return;
-				}
+			    if (valor.isEmpty()) {
+			        JOptionPane.showMessageDialog(null, "Ingrese dato para buscar");
+			        txtBuscar1.requestFocus();
+			        return;
+			    }
 
-				DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-				modelo.setRowCount(0);
+			    DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+			    modelo.setRowCount(0);
 
-				//  Buscar por DNI
-				if (rdbtnDNI.isSelected()) {
+			    try {
 
-					Paciente p = ap.buscarPorDni(valor);
+			        //  Buscar por DNI
+			        if (rdbtnDNI.isSelected()) {
 
-					if (p == null) {
-						JOptionPane.showMessageDialog(null, "DNI no existente");
-						return;
-					}
+			            Paciente p = ap.buscarPorDni(valor);
 
-					Object[] fila = {
-						p.getNombres(),
-						p.getApellidos(),
-						p.getEdad(),
-						p.getDni(),
-						p.getEstado(),
-						p.getCelular(),
-						p.getCorreo(),
-						p.getCodPaciente()
-					};
+			            if (p == null) {
+			                JOptionPane.showMessageDialog(null, "DNI no existente");
+			                return;
+			            }
 
-					modelo.addRow(fila);
-				}
+			            modelo.addRow(new Object[]{
+			                p.getNombres(),
+			                p.getApellidos(),
+			                p.getEdad(),
+			                p.getDni(),
+			                p.getEstado(),
+			                p.getCelular(),
+			                p.getCorreo(),
+			                p.getCodPaciente()
+			            });
+			        }
 
-				// 🔹 Buscar por Apellido
-				else if (rdbtnApellidos1.isSelected()) {
+			        //  Buscar por Apellido
+			        else if (rdbtnApellidos1.isSelected()) {
 
-					ArrayList<Paciente> lista = ap.buscarPorApellido(valor);
+			            ArrayList<Paciente> lista = ap.buscarPorApellido(valor);
 
-					if (lista.isEmpty()) {
-						JOptionPane.showMessageDialog(null, "Apellido no existente");
-						return;
-					}
+			            if (lista.isEmpty()) {
+			                JOptionPane.showMessageDialog(null, "Apellido no existente");
+			                return;
+			            }
 
-					for (Paciente p : lista) {
+			            for (Paciente p : lista) {
+			                modelo.addRow(new Object[]{
+			                    p.getNombres(),
+			                    p.getApellidos(),
+			                    p.getEdad(),
+			                    p.getDni(),
+			                    p.getEstado(),
+			                    p.getCelular(),
+			                    p.getCorreo(),
+			                    p.getCodPaciente()
+			                });
+			            }
+			        }
 
-						Object[] fila = {
-							p.getNombres(),
-							p.getApellidos(),
-							p.getEdad(),
-							p.getDni(),
-							p.getEstado(),
-							p.getCelular(),
-							p.getCorreo(),
-							p.getCodPaciente()
-						};
+			        else {
+			            JOptionPane.showMessageDialog(null, "Seleccione DNI o Apellidos");
+			        }
 
-						modelo.addRow(fila);
-					}
-				}
-
-				else {
-					JOptionPane.showMessageDialog(null, "Seleccione DNI o Apellidos");
-				}
+			    } catch (Exception ex) {
+			        ex.printStackTrace();
+			        JOptionPane.showMessageDialog(null, "Error al buscar: " + ex.getMessage());
+			    }
 			}
 		});
 
@@ -654,7 +658,13 @@ public class FRMMantenimientoPaciente extends JFrame {
 		txtEstado1.setEnabled(false);
 		txtCodigo.setEnabled(false);
 		
+		
+		//BOTON NUEVO
 		JButton btnAgregar = new JButton("Nuevo");
+		btnAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnAgregar.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/agregar.png")));
 		btnAgregar.setBackground(SystemColor.inactiveCaptionText);
 		btnAgregar.setBounds(33, 309, 100, 23);
@@ -662,7 +672,8 @@ public class FRMMantenimientoPaciente extends JFrame {
 		
 		
 
-		//arraylist
-		ap = new ArregloPaciente();
+		//conexion a la bd
+		PacienteDAO ap = new PacienteDAO();
+		
 	}
 }

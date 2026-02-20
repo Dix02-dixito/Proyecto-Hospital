@@ -24,6 +24,9 @@ public class Paciente {
 		this.correo = correo;
 		this.estado = estado;
 	}
+	
+	public Paciente() {
+	}
 
 	
 	//metodos get y set
