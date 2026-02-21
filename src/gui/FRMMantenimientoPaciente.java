@@ -546,7 +546,7 @@ public class FRMMantenimientoPaciente extends JFrame {
 		
 		
 		JRadioButton rdbtnDNI = new JRadioButton("DNI");
-		rdbtnDNI.setBounds(20, 14, 43, 23);
+		rdbtnDNI.setBounds(6, 14, 57, 23);
 		panel.add(rdbtnDNI);
 		
 		JRadioButton rdbtnApellidos1 = new JRadioButton("Apellidos");

@@ -8,7 +8,7 @@ public class TestConexion {
 
     
 	private static final String URL =
-		    "jdbc:sqlserver://localhost:1433;"
+		    "jdbc:sqlserver://192.168.100.11:1433;"
 		  + "databaseName=BDHospitalCibertec;"
 		  + "encrypt=true;"
 		  + "trustServerCertificate=true;"

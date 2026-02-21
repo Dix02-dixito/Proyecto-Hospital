@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConexionBD {
 
     private static final String URL =
-        "jdbc:sqlserver://localhost:1433;"
+        "jdbc:sqlserver://26.110.90.173:1433;"
       + "databaseName=BDHospitalCibertec;"
       + "encrypt=true;"
       + "trustServerCertificate=true;"

@@ -30,6 +30,9 @@ public class FRMConsulta extends JFrame {
 	private JPanel contentPane;
 	private JTable tblCitas;
 	private JTextField txtFecha;
+	private JTextField txtPaciente;
+	private JTextField txtConsultorio;
+	private JTextField txtMedico;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
@@ -148,22 +151,10 @@ public class FRMConsulta extends JFrame {
 		lblPaciente.setBounds(10, 11, 58, 14);
 		panelFiltros.add(lblPaciente);
 
-		JComboBox cmbxPaciente = new JComboBox();
-		cmbxPaciente.setBounds(108, 7, 185, 25);
-		panelFiltros.add(cmbxPaciente);
-
-		JComboBox cmbxConsultorio = new JComboBox();
-		cmbxConsultorio.setBounds(108, 47, 185, 25);
-		panelFiltros.add(cmbxConsultorio);
-
 		JLabel lblConsultorio = new JLabel("Consultorio:");
 		lblConsultorio.setFont(new Font("Serif", Font.BOLD, 12));
 		lblConsultorio.setBounds(10, 51, 67, 14);
 		panelFiltros.add(lblConsultorio);
-
-		JComboBox cmbxMedico = new JComboBox();
-		cmbxMedico.setBounds(404, 7, 185, 25);
-		panelFiltros.add(cmbxMedico);
 
 		JLabel lblMedico = new JLabel("Medico:");
 		lblMedico.setFont(new Font("Serif", Font.BOLD, 12));
@@ -179,5 +170,20 @@ public class FRMConsulta extends JFrame {
 		txtFecha.setBounds(404, 49, 185, 25);
 		panelFiltros.add(txtFecha);
 		txtFecha.setColumns(10);
+		
+		txtPaciente = new JTextField();
+		txtPaciente.setBounds(108, 9, 185, 25);
+		panelFiltros.add(txtPaciente);
+		txtPaciente.setColumns(10);
+		
+		txtConsultorio = new JTextField();
+		txtConsultorio.setColumns(10);
+		txtConsultorio.setBounds(108, 49, 185, 25);
+		panelFiltros.add(txtConsultorio);
+		
+		txtMedico = new JTextField();
+		txtMedico.setColumns(10);
+		txtMedico.setBounds(404, 9, 185, 25);
+		panelFiltros.add(txtMedico);
 	}
 }

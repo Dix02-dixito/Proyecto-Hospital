@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.Font;
@@ -102,6 +103,16 @@ public class FRMReporte extends JFrame {
 		JRadioButton rdbtnAgendaDia = new JRadioButton("Agenda del día");
 		rdbtnAgendaDia.setBounds(280, 33, 140, 23);
 		panelTipoReporte.add(rdbtnAgendaDia);
+		
+		ButtonGroup bg = new ButtonGroup();
+		bg.add(rdbtnPorPaciente);
+		bg.add(rdbtnPorMedico);
+		bg.add(rdbtnPorConsultorio);
+		bg.add(rdbtnPorFecha);
+		bg.add(rdbtnPendientes);
+		bg.add(rdbtnAgendaDia);
+		
+		
 
 		// Panel filtros
 		JPanel panelFiltros = new JPanel();
