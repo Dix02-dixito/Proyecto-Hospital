@@ -1,190 +1,195 @@
 package gui;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.awt.event.*;
+import conexion.ConexionBD;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import java.awt.Font;
-import java.awt.Color;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JButton;
-import java.awt.Toolkit;
-import java.awt.SystemColor;
-import javax.swing.JOptionPane;
+
 
 public class FRMLogin extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField txtUsuario;
-	private JPasswordField passwordcontra;
+ private JPanel contentPane;
+ private JTextField txtUsuario;
+ private JPasswordField passwordcontra;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FRMLogin frame = new FRMLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+ public static void main(String[] args) {
+    
+     EventQueue.invokeLater(() -> {
+         try {
+             FRMLogin frame = new FRMLogin();
+             frame.setVisible(true);
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+     });
+ }
 
-	public FRMLogin() {
-		setTitle("Inicio de Sesion");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(FRMLogin.class.getResource("/IMG/icon.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 430);
+ public FRMLogin() {
 
-		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.window);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+     
+     setTitle("Inicio de Sesión");
+     setSize(750, 450);
+     setLocationRelativeTo(null);
+     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     setResizable(false);
+     setUndecorated(true);
 
-		//  TITULOS Y LOGOS 
-		JLabel lblTitulo1 = new JLabel("Hospital Hermilio");
-		lblTitulo1.setForeground(new Color(255, 255, 255));
-		lblTitulo1.setFont(new Font("Times New Roman", Font.BOLD, 30));
-		lblTitulo1.setBounds(336, 173, 248, 36);
-		contentPane.add(lblTitulo1);
+     // bordes redondeados
+     setShape(new java.awt.geom.RoundRectangle2D.Double(0, 0, 750, 450, 40, 40));
 
-		JLabel lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon(FRMLogin.class.getResource("/img/logo (1).png")));
-		lblLogo.setBounds(370, 11, 151, 143);
-		contentPane.add(lblLogo);
+     contentPane = new JPanel();
+     contentPane.setLayout(null);
+     setContentPane(contentPane);
 
-		JLabel lblBackground = new JLabel("");
-		lblBackground.setIcon(new ImageIcon(FRMLogin.class.getResource("/img/city.png")));
-		lblBackground.setBounds(314, 0, 270, 394);
-		contentPane.add(lblBackground);
+     JPanel panelIzquierdo = new JPanel();
+     panelIzquierdo.setLayout(null);
+     panelIzquierdo.setBackground(Color.WHITE);
+     panelIzquierdo.setBounds(0, 0, 400, 450);
+     contentPane.add(panelIzquierdo);
 
-		JLabel lblIcono = new JLabel("");
-		lblIcono.setIcon(new ImageIcon(FRMLogin.class.getResource("/img/icon.png")));
-		lblIcono.setBounds(0, 0, 42, 36);
-		contentPane.add(lblIcono);
+     
+     JLabel lblTitulo = new JLabel("INICIAR SESION");
+     lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
+     lblTitulo.setForeground(new Color(25, 118, 210));
+     lblTitulo.setBounds(100, 60, 300, 30);
+     panelIzquierdo.add(lblTitulo);
 
-		JLabel lblTitulo2 = new JLabel("Hospital Hermilio");
-		lblTitulo2.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		lblTitulo2.setBounds(47, 11, 172, 14);
-		contentPane.add(lblTitulo2);
+     
+     JLabel lblUsuario = new JLabel("Usuario");
+     lblUsuario.setIcon(new ImageIcon(FRMLogin.class.getResource("/img/user-md.png")));
+     lblUsuario.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+     lblUsuario.setBounds(75, 130, 200, 20);
+     panelIzquierdo.add(lblUsuario);
 
-		JLabel lblTitulo3 = new JLabel("INICIAR SESION");
-		lblTitulo3.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-		lblTitulo3.setBounds(10, 56, 200, 20);
-		contentPane.add(lblTitulo3);
+     
+     txtUsuario = new JTextField();
+     txtUsuario.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+     txtUsuario.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(25,118,210)));
+     txtUsuario.setBounds(75, 155, 250, 30);
+     panelIzquierdo.add(txtUsuario);
 
-		// USUARIO 
-		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setIcon(new ImageIcon(FRMLogin.class.getResource("/IMG/user.png")));
-		lblUsuario.setFont(new Font("Sitka Text", Font.BOLD, 15));
-		lblUsuario.setBounds(10, 103, 120, 20);
-		contentPane.add(lblUsuario);
+     
+     JLabel lblPassword = new JLabel("Contrasena");
+     lblPassword.setIcon(new ImageIcon(FRMLogin.class.getResource("/img/password-protection (1).png")));
+     lblPassword.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+     lblPassword.setBounds(75, 210, 200, 20);
+     panelIzquierdo.add(lblPassword);
 
-		txtUsuario = new JTextField();
-		txtUsuario.setBackground(SystemColor.scrollbar);
-		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		txtUsuario.setText("Ingrese su usuario");
-		txtUsuario.setBounds(10, 134, 231, 25);
-		contentPane.add(txtUsuario);
+     
+     passwordcontra = new JPasswordField();
+     passwordcontra.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+     passwordcontra.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(25,118,210)));
+     passwordcontra.setBounds(75, 235, 250, 30);
+     panelIzquierdo.add(passwordcontra);
+     
+     
 
-		//  CONTRASEÑA 
+     
+     JButton btnIngresar = new JButton("INGRESAR");
+     btnIngresar.setBounds(75, 310, 250, 40);
+     btnIngresar.setBackground(new Color(25,118,210));
+     btnIngresar.setForeground(Color.WHITE);
+     btnIngresar.setFocusPainted(false);
+     btnIngresar.setFont(new Font("Segoe UI", Font.BOLD, 14));
+     btnIngresar.setBorder(BorderFactory.createEmptyBorder());
+     panelIzquierdo.add(btnIngresar);
 
-		JLabel lblContraseña = new JLabel("Contraseña");
-		lblContraseña.setIcon(new ImageIcon(FRMLogin.class.getResource("/IMG/password-protection (1).png")));
-		lblContraseña.setFont(new Font("Sitka Text", Font.BOLD, 15));
-		lblContraseña.setBounds(10, 186, 150, 26);
-		contentPane.add(lblContraseña);
+     //efecto del boton
+     
+     btnIngresar.addMouseListener(new MouseAdapter() {
+    	 public void mouseEntered(MouseEvent evt) {
+    		 btnIngresar.setBackground(new Color(13,71,161));
+    	 }
+    	 public void mouseExited(MouseEvent evt) {
+    		 btnIngresar.setBackground(new Color(25,118,210));
+    	 }
+     });
+     
+     //Evento del boton Ingresar xd
+     btnIngresar.addActionListener(e -> {
+    	//Obtener datos
+    	 String usuario = txtUsuario.getText();
+    	 String password = String.valueOf(passwordcontra.getPassword());
+    	 
+    	 //metodo autenticar
+    	 String rol = autenticar(usuario, password);
+    	 
+    	 if(rol != null) {
+    		 //Alerta de bienvenida si los datos son correctos
+    		 JOptionPane.showMessageDialog(this, "Bienvenido al hospital xd "  + usuario + " con el rol " + rol);
+    		 
+    		 // TE MANDA A LA VENTANA PRINCIPAL
+    		 FRMPrincipal principal = new FRMPrincipal();
+    		 principal.setVisible(true);
+    		 dispose();    		 
+    		 } 
+    	 //SI LOS DATOS INGRESADOS SON INCORRECTOS
+    	 else {
+    		 //Alerta datos incorrectos
+    		 JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña son incorrectos");
+    		 }
+     });
+    
+     JPanel panelDerecho = new JPanel();
+     panelDerecho.setBounds(400, 0, 350, 450);
+     panelDerecho.setLayout(null);
+     contentPane.add(panelDerecho);
 
-		passwordcontra = new JPasswordField();
-		passwordcontra.setBackground(SystemColor.scrollbar);
-		passwordcontra.setHorizontalAlignment(SwingConstants.CENTER);
-		passwordcontra.setBounds(10, 210, 231, 25);
-		contentPane.add(passwordcontra);
+     JLabel fondo = new JLabel();
+     fondo.setBounds(0, 0, 350, 450);
+     panelDerecho.add(fondo);
 
-		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 257, 294, 2);
-		contentPane.add(separator);
+     // cargar imagen original
+     ImageIcon iconoOriginal = new ImageIcon(
+             FRMLogin.class.getResource("/img/doctor-login.jpg"));
 
-		//  BOTON INGRESAR 
+     // para que la escalada de la imagen concuerde
+     Image imagen = iconoOriginal.getImage().getScaledInstance(
+             350, 450,
+             Image.SCALE_SMOOTH);
 
-		JButton btnIngresar = new JButton("Ingresar");
-		btnIngresar.setIcon(new ImageIcon(FRMLogin.class.getResource("/IMG/shield-check (1).png")));
-		btnIngresar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 15));
-		btnIngresar.setBackground(SystemColor.inactiveCaptionText);
-		btnIngresar.setForeground(SystemColor.desktop);
-		btnIngresar.setBounds(10, 281, 150, 36);
-		contentPane.add(btnIngresar);
+     fondo.setIcon(new ImageIcon(imagen));
 
-		// EVENTO BOTON
-		btnIngresar.addActionListener(e -> {
+     // boton cerrar personalizado
+     JButton btnCerrar = new JButton("X");
+     btnCerrar.setBounds(710, 10, 30, 30);
+     btnCerrar.setBackground(Color.RED);
+     btnCerrar.setForeground(Color.WHITE);
+     btnCerrar.setFocusPainted(false);
+     btnCerrar.setBorder(BorderFactory.createEmptyBorder());
+     contentPane.add(btnCerrar);
 
-			if (!validarCampos()) {
-				return;
-			}
+     // cerrar aplicacion
+     btnCerrar.addActionListener(e -> System.exit(0));
+ }
 
-			String usuario = txtUsuario.getText();
-			String password = String.valueOf(passwordcontra.getPassword());
-
-			if (autenticar(usuario, password)) {
-
-				JOptionPane.showMessageDialog(this, 
-						"Bienvenido");
-
-				
-
-			} else {
-
-				JOptionPane.showMessageDialog(this, 
-						"Usuario o contraseña incorrectos");
-				limpiarCampos();
-			}
-		});
-	}
-
-	//  METODOS 
-
-	private boolean validarCampos() {
-
-		if (txtUsuario.getText().trim().isEmpty() 
-				|| txtUsuario.getText().equals("Ingrese su usuario")) {
-
-			JOptionPane.showMessageDialog(this, 
-					"Ingrese el usuario");
-			txtUsuario.requestFocus();
-			return false;
-		}
-
-		if (String.valueOf(passwordcontra.getPassword()).trim().isEmpty()) {
-
-			JOptionPane.showMessageDialog(this, 
-					"Ingrese la contraseña");
-			passwordcontra.requestFocus();
-			return false;
-		}
-
-		return true;
-	}
-
-	private boolean autenticar(String usuario, String password) {
-
-		// USUARIO DEMO
-		String userDemo = "admin";
-		String passDemo = "1234";
-
-		return usuario.equals(userDemo) && password.equals(passDemo);
-	}
-
-	private void limpiarCampos() {
-		txtUsuario.setText("");
-		passwordcontra.setText("");
-		txtUsuario.requestFocus();
-	}
+ // metodo que valida usuario y contraseña en azurebd
+    private String autenticar (String usuario , String password) {
+    	String sql = "SELECT rol_usuario FROM usuario WHERE nombre_usuario = ? AND contrasena_usuario = ?";
+    	
+    	
+    	try (Connection con = ConexionBD.conectar();
+    			PreparedStatement ps = con.prepareStatement(sql)) {
+    		//ENVIAR PARAMETROS A LA CONSULTA
+    		
+    		ps.setString(1, usuario);
+    		ps.setString(2, password);
+    		
+    		ResultSet rs = ps.executeQuery();
+    		
+    		//SI ENCUENTRA REGISTRO DEVUELVE EL ROL
+    		
+    		if (rs.next()) {
+    			return rs.getString("rol_usuario");    			    			
+    		}    		
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		JOptionPane.showMessageDialog(this, "Error en la conexion con azurebd");
+    	}
+    	return null;
+    }
 }
