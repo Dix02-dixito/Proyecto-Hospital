@@ -43,6 +43,13 @@ public class FRMPrincipal extends JFrame {
 
         // boton para mantenimiento de paciente
         JButton btnpaciente = new JButton("mantenimiento paciente");
+        btnpaciente.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		 FRMMantenimientoPaciente mantenimientopaciente = new FRMMantenimientoPaciente();
+        		 mantenimientopaciente.setVisible(true);
+                 dispose();  
+        	}
+        });
         btnpaciente.setIcon(new ImageIcon(FRMPrincipal.class.getResource("/img/settings (2).png")));
         btnpaciente.setBounds(10, 136, 200, 40);
         panelmenu.add(btnpaciente);
