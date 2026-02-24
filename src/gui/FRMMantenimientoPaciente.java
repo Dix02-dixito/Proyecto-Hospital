@@ -668,12 +668,6 @@ public class FRMMantenimientoPaciente extends JFrame {
 		btnAgregar.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/agregar.png")));
 		btnAgregar.setBackground(SystemColor.inactiveCaptionText);
 		btnAgregar.setBounds(33, 309, 100, 23);
-		contentPane.add(btnAgregar);
-		
-		
-
-		//conexion a la bd
-		PacienteDAO ap = new PacienteDAO();
-		
+		contentPane.add(btnAgregar);							
 	}
 }

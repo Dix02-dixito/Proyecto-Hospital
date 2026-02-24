@@ -90,6 +90,7 @@ public class FRMLogin extends JFrame {
 
      
      JButton btnIngresar = new JButton("INGRESAR");
+     btnIngresar.setIcon(new ImageIcon(FRMLogin.class.getResource("/img/shield-check (1).png")));
      btnIngresar.setBounds(75, 310, 250, 40);
      btnIngresar.setBackground(new Color(25,118,210));
      btnIngresar.setForeground(Color.WHITE);
