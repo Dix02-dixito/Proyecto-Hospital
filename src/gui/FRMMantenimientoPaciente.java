@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.EventQueue;
+
 import javax.swing.JOptionPane;
 import javax.swing.ButtonGroup;
 import java.util.ArrayList;
@@ -31,9 +32,10 @@ import java.awt.Toolkit;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
-import dao.PacienteDAO;
 
-import controlador.ArregloPaciente;
+import controlador.*;
+import controlador.PacienteDAO;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -278,25 +280,26 @@ public class FRMMantenimientoPaciente extends JFrame {
 		//boton modificar
 		JButton btnModificar1 =  new JButton("Modificar");
 		btnModificar1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		    public void actionPerformed(ActionEvent e) {
+
 		        int fila = table.getSelectedRow();
 
 		        if (fila == -1) {
-		            JOptionPane.showMessageDialog(null, "Seleccione un paciente de la tabla");
+		            JOptionPane.showMessageDialog(null, "seleccione un paciente");
 		            return;
 		        }
 
-		        // Obtener código del paciente de la tabla
+		        // Obtiene el codigo (columna 7)
 		        int codigo = Integer.parseInt(table.getValueAt(fila, 7).toString());
 
-		        // Buscar paciente en el arreglo
 		        Paciente p = ap.buscarPorCodigo(codigo);
+
 		        if (p == null) {
-		            JOptionPane.showMessageDialog(null, "Paciente no encontrado");
+		            JOptionPane.showMessageDialog(null, "no se encontro el paciente");
 		            return;
 		        }
 
-		        // Cargar datos en los campos de texto
+		        // Cargar datos en los campos
 		        txtCodigo.setText(String.valueOf(p.getCodPaciente()));
 		        txtNombre1.setText(p.getNombres());
 		        txtApellidos1.setText(p.getApellidos());
@@ -313,12 +316,11 @@ public class FRMMantenimientoPaciente extends JFrame {
 		        txtEdad1.setEnabled(true);
 		        txtTelefono1.setEnabled(true);
 		        txtCorreo1.setEnabled(true);
-		        txtEstado1.setEnabled(true);
+		        txtEstado1.setEnabled(false);
 
-		        JOptionPane.showMessageDialog(null, "Modifique los campos y presione 'Grabar' para guardar");
+		        txtNombre1.requestFocus();
 		    }
-				 
-			});
+		});
 		
 		
 		
@@ -395,74 +397,51 @@ public class FRMMantenimientoPaciente extends JFrame {
 		JButton btnGrabar1 = new JButton("Grabar");
 		btnGrabar1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try {
+				if (txtCodigo.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Seleccione un paciente");
+					return ;
+				}
+				
+				int codigo = Integer.parseInt(txtCodigo.getText());
+				String dni = txtDNI1.getText().trim();
+				
+				if (ap.existeDni(dni, codigo)) {
+					JOptionPane.showMessageDialog(null, "El dni ya se encuentra registrado");
+					return ;
+				}
+				
+				Paciente p = new Paciente();
+				
+				p.setCodPaciente(codigo);
+				p.setNombres(txtNombre1.getText().trim());
+				p.setApellidos(txtApellidos1.getText().trim());
+				p.setEdad(Integer.parseInt(txtEdad1.getText()));
+				p.setDni(dni);
+				p.setCelular(txtTelefono1.getText().trim());
+				p.setCorreo(txtCorreo1.getText().trim());
+				
+				boolean actualizado = ap.actualizarPaciente(p);
+				
+				if (actualizado)  {
+					JOptionPane.showMessageDialog(null, "El paciente ah sido actualizado correctamente");
+					
+				} else { 
+					JOptionPane.showMessageDialog(null, "El Paciente no ah sido actualizado");
+				}
+				
+				} catch (NumberFormatException ex ) {
+					JOptionPane.showMessageDialog(null, "La edad debe ser numerica");
+				}
+				
+				catch (Exception ex) {
+				    JOptionPane.showMessageDialog(null, "Error inesperado");
+				}
 
-		        // Validación
-		        if (!validarCampos()) return;
-
-		        try {
-		            int codigo = Integer.parseInt(txtCodigo.getText().trim());
-		            int edad = Integer.parseInt(txtEdad1.getText().trim());
-		            int estado = Integer.parseInt(txtEstado1.getText().trim());
-
-		            // 🔹 Buscar paciente existente
-		            Paciente p = ap.buscarPorCodigo(codigo);
-		            if (p == null) {
-		                JOptionPane.showMessageDialog(null,
-		                        "Paciente no encontrado para actualizar",
-		                        "Error",
-		                        JOptionPane.ERROR_MESSAGE);
-		                return;
-		            }
-
-		            // 🔹 Actualizar campos del paciente
-		            p.setNombres(txtNombre1.getText().trim());
-		            p.setApellidos(txtApellidos1.getText().trim());
-		            p.setDni(txtDNI1.getText().trim());
-		            p.setEdad(edad);
-		            p.setCelular(txtTelefono1.getText().trim());
-		            p.setCorreo(txtCorreo1.getText().trim());
-		            p.setEstado(estado);
-
-		            JOptionPane.showMessageDialog(null,
-		                    "Paciente actualizado correctamente",
-		                    "Éxito",
-		                    JOptionPane.INFORMATION_MESSAGE);
-
-		            // 🔹 Actualizar tabla
-		            DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-		            modelo.setRowCount(0);
-		            for (int i = 0; i < ap.tamanio(); i++) {
-		                Paciente px = ap.obtener(i);
-		                Object[] fila = {
-		                        px.getNombres(),
-		                        px.getApellidos(),
-		                        px.getEdad(),
-		                        px.getDni(),
-		                        px.getEstado(),
-		                        px.getCelular(),
-		                        px.getCorreo(),
-		                        px.getCodPaciente()
-		                };
-		                modelo.addRow(fila);
-		            }
-
-		            // 🔹 Bloquear campos nuevamente
-		            txtNombre1.setEnabled(false);
-		            txtApellidos1.setEnabled(false);
-		            txtDNI1.setEnabled(false);
-		            txtEdad1.setEnabled(false);
-		            txtTelefono1.setEnabled(false);
-		            txtCorreo1.setEnabled(false);
-		            txtEstado1.setEnabled(false);
-
-		        } catch (NumberFormatException ex) {
-		            JOptionPane.showMessageDialog(null,
-		                    "Edad y Estado deben ser números válidos",
-		                    "Error",
-		                    JOptionPane.ERROR_MESSAGE);
-		        }
-		    }
+			 }  
 			});
+		
 		btnGrabar1.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
 		btnGrabar1.setBackground(SystemColor.inactiveCaptionText);
 		btnGrabar1.setBounds(259, 309, 100, 23);
@@ -572,13 +551,13 @@ public class FRMMantenimientoPaciente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 			    String valor = txtBuscar1.getText().trim();
-
+             //valida que el campo no este vacio y si esta vacio te manda la alerta
 			    if (valor.isEmpty()) {
 			        JOptionPane.showMessageDialog(null, "Ingrese dato para buscar");
 			        txtBuscar1.requestFocus();
 			        return;
 			    }
-
+            //
 			    DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 			    modelo.setRowCount(0);
 
@@ -588,9 +567,9 @@ public class FRMMantenimientoPaciente extends JFrame {
 			        if (rdbtnDNI.isSelected()) {
 
 			            Paciente p = ap.buscarPorDni(valor);
-
+                              
 			            if (p == null) {
-			                JOptionPane.showMessageDialog(null, "DNI no existente");
+			                JOptionPane.showMessageDialog(null, "DNI NO EXISTENTE");
 			                return;
 			            }
 
@@ -608,14 +587,14 @@ public class FRMMantenimientoPaciente extends JFrame {
 
 			        //  Buscar por Apellido
 			        else if (rdbtnApellidos1.isSelected()) {
-
+                     //usamos lista por que puede aver varios pacientes con el mismo apellido
 			            ArrayList<Paciente> lista = ap.buscarPorApellido(valor);
-
+                     //Si no encuentro el apellido ingresado
 			            if (lista.isEmpty()) {
 			                JOptionPane.showMessageDialog(null, "Apellido no existente");
 			                return;
 			            }
-
+             //Si hay resultados los recorre y los devuelve
 			            for (Paciente p : lista) {
 			                modelo.addRow(new Object[]{
 			                    p.getNombres(),
@@ -629,11 +608,11 @@ public class FRMMantenimientoPaciente extends JFrame {
 			                });
 			            }
 			        }
-
+                    //alerta si no ah seleccionado ni dni ni apellido
 			        else {
 			            JOptionPane.showMessageDialog(null, "Seleccione DNI o Apellidos");
 			        }
-
+               //si hubo un error al buscar
 			    } catch (Exception ex) {
 			        ex.printStackTrace();
 			        JOptionPane.showMessageDialog(null, "Error al buscar: " + ex.getMessage());
