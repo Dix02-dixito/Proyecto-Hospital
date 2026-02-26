@@ -5,6 +5,8 @@ import javax.swing.JOptionPane;
 import conexion.ConexionBD;
 
 public class UsuarioDAO {
+	
+	//METODO PARA VALIDAR EL INICIO DE SESION
 
     public static String validarLogin(String usuario, String contraseña) {
     	String rol = null;

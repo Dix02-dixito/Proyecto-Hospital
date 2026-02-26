@@ -172,8 +172,26 @@ public class FRMReporte extends JFrame {
 		tblReporte.setEnabled(false);
 		tblReporte.setRowSelectionAllowed(false);
 		tblReporte.setModel(new DefaultTableModel(
-			new Object[15][7],
-			new String[] {"Paciente", "Médico", "Consultorio", "Fecha", "Hora", "Estado", "Observación"}
+			new Object[][] {
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+			},
+			new String[] {
+				"Paciente", "M\u00E9dico", "Consultorio", "Fecha", "Hora", "Estado", "Motiv\u00F3"
+			}
 		));
 		tblReporte.getTableHeader().setReorderingAllowed(false);
 		tblReporte.setBorder(new LineBorder(Color.BLACK));

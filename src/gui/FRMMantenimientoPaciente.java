@@ -197,7 +197,7 @@ public class FRMMantenimientoPaciente extends JFrame {
 
 	
 
-	
+
 
 	
 	/**
@@ -216,7 +216,7 @@ public class FRMMantenimientoPaciente extends JFrame {
 		});
 	}
 	
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -433,10 +433,7 @@ public class FRMMantenimientoPaciente extends JFrame {
 		JButton btnGrabar1 = new JButton("Grabar");
 		btnGrabar1.setForeground(new Color(0, 0, 128));
 		btnGrabar1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				btnGrabar1.addActionListener(new ActionListener() {
-				    public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {			
 
 				        // validar campos
 				        if (!validarCampos()) return;
@@ -763,5 +760,5 @@ public class FRMMantenimientoPaciente extends JFrame {
 			
 	}
 }
-
+	
 		
