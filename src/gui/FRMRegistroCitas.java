@@ -202,14 +202,14 @@ public class FRMRegistroCitas extends JFrame {
 		JButton btnNuevo = new JButton("Nuevo");
 		btnNuevo.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/agregar.png")));
 		btnNuevo.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
-		btnNuevo.setBackground(SystemColor.inactiveCaptionText);
+		btnNuevo.setBackground(new Color(0, 128, 128));
 		btnNuevo.setBounds(30, 505, 125, 25);
 		contentPane.add(btnNuevo);
 		
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
 		btnGuardar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
-		btnGuardar.setBackground(SystemColor.inactiveCaptionText);
+		btnGuardar.setBackground(new Color(0, 128, 128));
 		btnGuardar.setBounds(165, 505, 125, 25);
 		contentPane.add(btnGuardar);
 		
@@ -220,14 +220,14 @@ public class FRMRegistroCitas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnModificar.setBackground(SystemColor.inactiveCaptionText);
+		btnModificar.setBackground(new Color(0, 128, 128));
 		btnModificar.setBounds(300, 505, 125, 25);
 		contentPane.add(btnModificar);
 		
 		JButton btnCancelarCita = new JButton("Cancelar Cita");
 		btnCancelarCita.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/cruz-pequena.png")));
 		btnCancelarCita.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
-		btnCancelarCita.setBackground(SystemColor.inactiveCaptionText);
+		btnCancelarCita.setBackground(new Color(0, 128, 128));
 		btnCancelarCita.setBounds(435, 505, 146, 25);
 		contentPane.add(btnCancelarCita);
 		
@@ -238,14 +238,15 @@ public class FRMRegistroCitas extends JFrame {
 			}
 		});
 		btnLimpiar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
-		btnLimpiar.setBackground(SystemColor.inactiveCaptionText);
+		btnLimpiar.setBackground(new Color(0, 128, 128));
 		btnLimpiar.setBounds(591, 505, 125, 25);
 		contentPane.add(btnLimpiar);
 		
 		JButton btnSalir = new JButton("Salir / Volver");
+		btnSalir.setForeground(new Color(128, 0, 0));
 		btnSalir.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/salida.png")));
 		btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
-		btnSalir.setBackground(SystemColor.inactiveCaptionText);
+		btnSalir.setBackground(new Color(128, 128, 128));
 		btnSalir.setBounds(621, 14, 150, 30);
 		contentPane.add(btnSalir);
 		

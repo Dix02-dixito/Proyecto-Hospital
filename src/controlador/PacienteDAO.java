@@ -9,43 +9,42 @@ import conexion.ConexionBD;
 public class PacienteDAO {
 	
 //METODO PARA LISTAR PACIENTE
-    public List<Paciente> listarPacientes() {
+	public List<Paciente> listarActivos() {
 
-        List<Paciente> lista = new ArrayList<>();
+	    List<Paciente> lista = new ArrayList<>();
+	    String sql = "SELECT * FROM paciente WHERE estado_paciente = 1";
 
-        String sql = "SELECT * FROM Paciente";
+	    try (Connection con = ConexionBD.conectar();
+	         PreparedStatement ps = con.prepareStatement(sql);
+	         ResultSet rs = ps.executeQuery()) {
 
-        try (Connection con = ConexionBD.conectar();
-             Statement st = con.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
+	        while (rs.next()) {
+	            Paciente p = new Paciente();
 
-            while (rs.next()) {
-                Paciente p = new Paciente();
+	            p.setCodPaciente(rs.getInt("codPaciente"));
+	            p.setNombres(rs.getString("nombres_paciente"));
+	            p.setApellidos(rs.getString("apellidos_paciente"));
+	            p.setEdad(rs.getInt("edad_paciente"));
+	            p.setDni(rs.getString("dni_paciente"));
+	            p.setEstado(rs.getInt("estado_paciente"));
+	            p.setCelular(rs.getString("celular_paciente"));
+	            p.setCorreo(rs.getString("correo_paciente"));
 
-                p.setCodPaciente(rs.getInt("codPaciente"));
-                p.setNombres(rs.getString("nombres_paciente"));
-                p.setApellidos(rs.getString("apellidos_paciente"));
-                p.setEdad(rs.getInt("edad_paciente"));
-                p.setDni(rs.getString("dni_paciente"));
-                p.setEstado(rs.getInt("estado_paciente"));
-                p.setCelular(rs.getString("celular_paciente"));
-                p.setCorreo(rs.getString("correo_paciente"));
+	            lista.add(p);
+	        }
 
-                lista.add(p);
-            }
-            
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return lista;
-    }
-    //METODO PARA INSERTAR PACIENTE
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return lista;
+	}
+	
+	
+    ////METODO PARA AGREGAR un nuevo PACIENTE
     public boolean insertarPaciente(Paciente p) {
 
-        String sql = "INSERT INTO Paciente " +
-        		"(nombres_paciente, apellidos_paciente, edad_paciente, dni_paciente, correo_paciente, celular_paciente, estado_paciente) " +
+        String sql = "INSERT INTO paciente " +
+                "(nombres_paciente, apellidos_paciente, edad_paciente, dni_paciente, correo_paciente, celular_paciente, estado_paciente) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection con = ConexionBD.conectar();
@@ -53,20 +52,22 @@ public class PacienteDAO {
 
             ps.setString(1, p.getNombres());
             ps.setString(2, p.getApellidos());
-            ps.setString(3, p.getDni());
-            ps.setInt(4, p.getEdad());
-            ps.setString(5, p.getCelular());
-            ps.setString(6, p.getCorreo());
-            ps.setInt(7, p.getEstado());
+            ps.setInt(3, p.getEdad());
+            ps.setString(4, p.getDni());
+            ps.setString(5, p.getCorreo());
+            ps.setString(6, p.getCelular());
+            ps.setInt(7, p.getEstado()); 
 
             return ps.executeUpdate() > 0;
 
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
-    //METODO PARA ACTUALIZAR PACIENTE en el boton
+    
+    
+    //METODO PARA ACTUALIZAR PACIENTE EN EL BOTON GUARDAR
     public boolean actualizarPaciente(Paciente p) {
 
     	String sql = "UPDATE paciente SET " +
@@ -210,7 +211,7 @@ public class PacienteDAO {
         }
     }
     
-    //METODO PARA VALIDAR QUE NO HAYA DNI DUPLICADO
+    //METODO PARA VALIDAR QUE NO HAYA DNI DUPLICADO EN NUEVO
     
     public boolean existeDni(String dni, int codigoActual) {
 
@@ -235,5 +236,31 @@ public class PacienteDAO {
         return false;
     }
     
+  //METODO PARA VALIDAR QUE NO HAYA DNI DUPLICADO EN ACTUALIZAR
     
+    public boolean existeDniNuevo(String dni) {
+
+        String sql = "SELECT COUNT(*) FROM paciente WHERE dni_paciente = ?";
+
+        try (Connection con = ConexionBD.conectar();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, dni);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0; // true si ya existe
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    
+
+    
+    
+
 }

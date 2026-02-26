@@ -9,6 +9,7 @@ public class FRMPrincipal extends JFrame {
     private JPanel contentpane;
 
     public FRMPrincipal() {
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(FRMPrincipal.class.getResource("/img/icon.png")));
         // configuracion de la ventana principal
         setTitle("sistema hospitalario");
         setSize(769, 550);
@@ -56,30 +57,66 @@ public class FRMPrincipal extends JFrame {
 
         // boton para mantenimiento de medico
         JButton btnmedico = new JButton("mantenimiento medico");
+        btnmedico.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		FRMMantenimientoMedico mantenimientomedico = new FRMMantenimientoMedico();
+       		 mantenimientomedico.setVisible(true);
+                dispose();  
+        	}
+        });
         btnmedico.setIcon(new ImageIcon(FRMPrincipal.class.getResource("/img/settings (2).png")));
         btnmedico.setBounds(10, 187, 200, 40);
         panelmenu.add(btnmedico);
 
         // boton para mantenimiento de consultorio
         JButton btnconsultorio = new JButton("mantenimiento consultorio");
+        btnconsultorio.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		FRMMantenimientoConsultorio mantenimientoconsultorio = new FRMMantenimientoConsultorio();
+        		mantenimientoconsultorio.setVisible(true);
+                   dispose();  
+        	}
+        });
         btnconsultorio.setIcon(new ImageIcon(FRMPrincipal.class.getResource("/img/settings (2).png")));
         btnconsultorio.setBounds(10, 238, 200, 40);
         panelmenu.add(btnconsultorio);
 
         // boton para consulta
         JButton btnconsulta = new JButton("consulta");
+        btnconsulta.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		FRMConsulta consulta = new FRMConsulta();
+        		consulta.setVisible(true);
+                   dispose();  
+        	}
+        });
         btnconsulta.setIcon(new ImageIcon(FRMPrincipal.class.getResource("/img/eye.png")));
         btnconsulta.setBounds(10, 289, 200, 40);
         panelmenu.add(btnconsulta);
 
         // boton para reporte
         JButton btnreporte = new JButton("reporte");
+        btnreporte.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		FRMReporte reporte = new FRMReporte();
+        		reporte.setVisible(true);
+                   dispose();  
+        	}
+        });
         btnreporte.setIcon(new ImageIcon(FRMPrincipal.class.getResource("/img/exclamation.png")));
         btnreporte.setBounds(10, 340, 200, 40);
         panelmenu.add(btnreporte);
 
         // boton para ayuda
         JButton btnayuda = new JButton("ayuda");
+        btnayuda.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		FRMAyuda ayuda = new FRMAyuda();
+        		ayuda.setVisible(true);
+                   dispose();  
+        		
+        	}
+        });
         btnayuda.setIcon(new ImageIcon(FRMPrincipal.class.getResource("/img/headset.png")));
         btnayuda.setBounds(10, 391, 200, 40);
         panelmenu.add(btnayuda);

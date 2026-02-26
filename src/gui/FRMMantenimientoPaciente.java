@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.EventQueue;
 
+
+
 import javax.swing.JOptionPane;
 import javax.swing.ButtonGroup;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ import java.util.List;
 
 import controlador.*;
 import controlador.PacienteDAO;
+import controlador.CitaDao;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -53,8 +56,61 @@ public class FRMMantenimientoPaciente extends JFrame {
 	private JTextField txtCodigo;
 	private JTextField txtBuscar1;
 	private JTable table;
+	private boolean modoNuevo = false;
 	//Arraylist
 	private PacienteDAO ap = new PacienteDAO();
+	
+	private void cargarPacientesActivos() {
+
+	    DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+	    modelo.setRowCount(0);
+
+	    for (Paciente p : ap.listarActivos()) {
+
+	        if (p.getEstado() == 1) {
+	            modelo.addRow(new Object[]{
+	                p.getNombres(),
+	                p.getApellidos(),
+	                p.getEdad(),
+	                p.getDni(),
+	                p.getEstado(),
+	                p.getCelular(),
+	                p.getCorreo(),
+	                p.getCodPaciente()
+	            });
+	        }
+	    }
+	}
+	private void habilitarCampos(boolean estado) {
+	    txtNombre1.setEnabled(estado);
+	    txtApellidos1.setEnabled(estado);
+	    txtDNI1.setEnabled(estado);
+	    txtEdad1.setEnabled(estado);
+	    txtTelefono1.setEnabled(estado);
+	    txtCorreo1.setEnabled(estado);
+
+	    
+	    txtCodigo.setEnabled(false);
+
+	    
+	 
+	    txtEstado1.setEnabled(false);
+	}
+
+	private void limpiarCamposArriba() {
+	    txtCodigo.setText("");
+	    txtNombre1.setText("");
+	    txtApellidos1.setText("");
+	    txtDNI1.setText("");
+	    txtEdad1.setText("");
+	    txtTelefono1.setText("");
+	    txtCorreo1.setText("");
+
+	  
+	    txtEstado1.setText("1");
+	}
+	
+	
 	
 	//metodo validacion de campos vacios
 	private boolean validarCampos() {
@@ -159,6 +215,7 @@ public class FRMMantenimientoPaciente extends JFrame {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the frame.
@@ -275,10 +332,11 @@ public class FRMMantenimientoPaciente extends JFrame {
 		contentPane.add(scrollBar);
 		
 		JLabel lblConsulta1 = new JLabel("Consulta");
-		lblConsulta1.setBounds(33, 216, 46, 14);
+		lblConsulta1.setBounds(33, 216, 60, 14);
 		contentPane.add(lblConsulta1);
 		//boton modificar
 		JButton btnModificar1 =  new JButton("Modificar");
+		btnModificar1.setForeground(new Color(0, 0, 128));
 		btnModificar1.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 
@@ -325,129 +383,162 @@ public class FRMMantenimientoPaciente extends JFrame {
 		
 		
 		btnModificar1.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
-		btnModificar1.setBackground(SystemColor.inactiveCaptionText);
-		btnModificar1.setBounds(143, 309, 100, 23);
+		btnModificar1.setBackground(new Color(0, 128, 128));
+		btnModificar1.setBounds(130, 309, 113, 23);
 		contentPane.add(btnModificar1);
 		
 		//boton eliminar
 		JButton btnEliminar1 = new JButton("Eliminar");
+		btnEliminar1.setForeground(new Color(0, 0, 128));
 		btnEliminar1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//codigo del boton eliminar
-				 int fila = table.getSelectedRow();
+				CitaDao citaDao = new CitaDao();
+				PacienteDAO pacienteDao = new PacienteDAO();
 
-			        if (fila == -1) {
-			            JOptionPane.showMessageDialog(null, "Seleccione un paciente para eliminar");
-			            return;
-			        }
+				int fila = table.getSelectedRow();
 
-			        // Confirmación de eliminación
-			        int opcion = JOptionPane.showConfirmDialog(null,
-			                "¿Está seguro que desea eliminar este paciente?",
-			                "Confirmar eliminación",
-			                JOptionPane.YES_NO_OPTION);
+				if (fila == -1) {
+				    JOptionPane.showMessageDialog(null, "Seleccione un paciente");
+				    return;
+				}
 
-			        if (opcion != JOptionPane.YES_OPTION) return;
+				int codPaciente = Integer.parseInt(
+				        table.getValueAt(fila, 7).toString());
 
-			        // Obtener el código del paciente seleccionado
-			        int codigo = Integer.parseInt(table.getValueAt(fila, 7).toString());
+				// Validar citas pendientes
+				if (citaDao.pacienteTieneCitasFuturas(codPaciente)) {
+				    JOptionPane.showMessageDialog(null,
+				        "No se puede eliminar. Tiene citas pendientes.");
+				    return;
+				}
 
-			        // Buscar paciente en el arreglo
-			        Paciente p = ap.buscarPorCodigo(codigo);
-			        if (p != null) {
-			            ap.eliminar(p); // Cambia estado a 0
-			            JOptionPane.showMessageDialog(null,
-			                    "Paciente eliminado correctamente",
-			                    "Éxito",
-			                    JOptionPane.INFORMATION_MESSAGE);
-			        } else {
-			            JOptionPane.showMessageDialog(null,
-			                    "Paciente no encontrado",
-			                    "Error",
-			                    JOptionPane.ERROR_MESSAGE);
-			        }
+				// Eliminación lógica
+				boolean eliminado = pacienteDao.eliminarPaciente(codPaciente);
 
-			        // Actualizar tabla mostrando solo pacientes activos
-			        DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-			        modelo.setRowCount(0);
-
-			        for (int i = 0; i < ap.tamanio(); i++) {
-			            Paciente px = ap.obtener(i);
-			            if (px.getEstado() != 0) { // Mostrar solo activos
-			                Object[] filaTabla = {
-			                        px.getNombres(),
-			                        px.getApellidos(),
-			                        px.getEdad(),
-			                        px.getDni(),
-			                        px.getEstado(),
-			                        px.getCelular(),
-			                        px.getCorreo(),
-			                        px.getCodPaciente()
-			                };
-			                modelo.addRow(filaTabla);
-			            }
-			        }
+				if (eliminado) {
+				    JOptionPane.showMessageDialog(null, "Paciente eliminado correctamente");
+				} else {
+				    JOptionPane.showMessageDialog(null, "Error al eliminar");
+				}
+               
+				 
 			    }
 		});
 		btnEliminar1.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/cruz-pequena.png")));
-		btnEliminar1.setBackground(SystemColor.inactiveCaptionText);
+		btnEliminar1.setBackground(new Color(0, 128, 128));
 		btnEliminar1.setBounds(369, 309, 100, 23);
 		contentPane.add(btnEliminar1);
 		//boton grabar osea guardar cambios xd
 		JButton btnGrabar1 = new JButton("Grabar");
+		btnGrabar1.setForeground(new Color(0, 0, 128));
 		btnGrabar1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				try {
-				if (txtCodigo.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Seleccione un paciente");
-					return ;
-				}
-				
-				int codigo = Integer.parseInt(txtCodigo.getText());
-				String dni = txtDNI1.getText().trim();
-				
-				if (ap.existeDni(dni, codigo)) {
-					JOptionPane.showMessageDialog(null, "El dni ya se encuentra registrado");
-					return ;
-				}
-				
-				Paciente p = new Paciente();
-				
-				p.setCodPaciente(codigo);
-				p.setNombres(txtNombre1.getText().trim());
-				p.setApellidos(txtApellidos1.getText().trim());
-				p.setEdad(Integer.parseInt(txtEdad1.getText()));
-				p.setDni(dni);
-				p.setCelular(txtTelefono1.getText().trim());
-				p.setCorreo(txtCorreo1.getText().trim());
-				
-				boolean actualizado = ap.actualizarPaciente(p);
-				
-				if (actualizado)  {
-					JOptionPane.showMessageDialog(null, "El paciente ah sido actualizado correctamente");
-					
-				} else { 
-					JOptionPane.showMessageDialog(null, "El Paciente no ah sido actualizado");
-				}
-				
-				} catch (NumberFormatException ex ) {
-					JOptionPane.showMessageDialog(null, "La edad debe ser numerica");
-				}
-				
-				catch (Exception ex) {
-				    JOptionPane.showMessageDialog(null, "Error inesperado");
-				}
+				btnGrabar1.addActionListener(new ActionListener() {
+				    public void actionPerformed(ActionEvent e) {
 
-			 }  
-			});
+				        // validar campos
+				        if (!validarCampos()) return;
+
+				        try {
+				            String dni = txtDNI1.getText().trim();
+
+				            Paciente p = new Paciente();
+				            p.setNombres(txtNombre1.getText().trim());
+				            p.setApellidos(txtApellidos1.getText().trim());
+				            p.setDni(dni);
+				            p.setEdad(Integer.parseInt(txtEdad1.getText().trim()));
+				            p.setCelular(txtTelefono1.getText().trim());
+				            p.setCorreo(txtCorreo1.getText().trim());
+				            p.setEstado(1); // siempre activo al guardar
+
+				            boolean ok = false;
+
+				            // ========= NUEVO =========
+				            if (modoNuevo) {
+
+				                // validar DNI unico
+				                if (ap.existeDniNuevo(dni)) {
+				                    JOptionPane.showMessageDialog(null,
+				                            "El DNI ya esta registrado",
+				                            "Validacion",
+				                            JOptionPane.WARNING_MESSAGE);
+				                    txtDNI1.requestFocus();
+				                    return;
+				                }
+
+				                ok = ap.insertarPaciente(p);
+
+				                if (ok) {
+				                    JOptionPane.showMessageDialog(null,
+				                            "Paciente registrado correctamente");
+				                }
+
+				            }
+				            // ========= MODIFICAR =========
+				            else {
+
+				                int codigo = Integer.parseInt(txtCodigo.getText());
+
+				                // validar DNI unico excluyendo el actual
+				                if (ap.existeDni(dni, codigo)) {
+				                    JOptionPane.showMessageDialog(null,
+				                            "El DNI ya esta registrado en otro paciente",
+				                            "Validacion",
+				                            JOptionPane.WARNING_MESSAGE);
+				                    txtDNI1.requestFocus();
+				                    return;
+				                }
+
+				                p.setCodPaciente(codigo);
+
+				                ok = ap.actualizarPaciente(p);
+
+				                if (ok) {
+				                    JOptionPane.showMessageDialog(null,
+				                            "Paciente actualizado correctamente");
+				                }
+				            }
+
+				            if (!ok) {
+				                JOptionPane.showMessageDialog(null,
+				                        "No se pudo guardar el paciente",
+				                        "Error",
+				                        JOptionPane.ERROR_MESSAGE);
+				                return;
+				            }
+
+				            // refrescar tabla
+				            cargarPacientesActivos();
+
+				            // bloquear campos y salir de modo nuevo
+				            habilitarCampos(false);
+				            limpiarCamposArriba();
+				            modoNuevo = false;
+
+				        } catch (NumberFormatException ex) {
+				            JOptionPane.showMessageDialog(null,
+				                    "Edad invalida",
+				                    "Error",
+				                    JOptionPane.ERROR_MESSAGE);
+				        } catch (Exception ex) {
+				            ex.printStackTrace();
+				            JOptionPane.showMessageDialog(null,
+				                    "Error inesperado",
+				                    "Error",
+				                    JOptionPane.ERROR_MESSAGE);
+				        }
+				    }
+				});
 		
 		btnGrabar1.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
-		btnGrabar1.setBackground(SystemColor.inactiveCaptionText);
-		btnGrabar1.setBounds(259, 309, 100, 23);
+		btnGrabar1.setBackground(new Color(0, 128, 128));
+		btnGrabar1.setBounds(257, 309, 100, 23);
 		contentPane.add(btnGrabar1);
 		//Boton para volver a la ventana principal
 		JButton btnSalir = new JButton("Salir / Volver");
+		btnSalir.setForeground(new Color(220, 20, 60));
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//codigo para volver a la ventana principal
@@ -460,11 +551,12 @@ public class FRMMantenimientoPaciente extends JFrame {
 		});
 		btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
 		btnSalir.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/salida.png")));
-		btnSalir.setBackground(SystemColor.inactiveCaptionText);
-		btnSalir.setBounds(467, 30, 135, 35);
+		btnSalir.setBackground(new Color(128, 128, 128));
+		btnSalir.setBounds(452, 30, 150, 35);
 		contentPane.add(btnSalir);
 		//boton limpiar
 		JButton btnLimpiar1 = new JButton("Limpiar");
+		btnLimpiar1.setForeground(new Color(0, 0, 128));
 		btnLimpiar1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			//codigo de el boton limpiar
@@ -490,7 +582,7 @@ public class FRMMantenimientoPaciente extends JFrame {
 		    }
 		});
 		btnLimpiar1.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/escoba.png")));
-		btnLimpiar1.setBackground(SystemColor.inactiveCaptionText);
+		btnLimpiar1.setBackground(new Color(0, 128, 128));
 		btnLimpiar1.setBounds(488, 309, 100, 23);
 		contentPane.add(btnLimpiar1);
 		
@@ -547,6 +639,7 @@ public class FRMMantenimientoPaciente extends JFrame {
 		
 		//boton buscar con base de datos
 		JButton btnBuscar1 = new JButton("Buscar");
+		btnBuscar1.setForeground(new Color(128, 128, 0));
 		btnBuscar1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -621,10 +714,10 @@ public class FRMMantenimientoPaciente extends JFrame {
 		});
 
 
-		btnBuscar1.setBounds(389, 14, 89, 23);
+		btnBuscar1.setBounds(389, 14, 105, 23);
 		panel.add(btnBuscar1);
 		btnBuscar1.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/busqueda.png")));
-		btnBuscar1.setBackground(SystemColor.inactiveCaptionText);
+		btnBuscar1.setBackground(SystemColor.info);
 		
 		//deshabilita los campos
 		
@@ -640,13 +733,35 @@ public class FRMMantenimientoPaciente extends JFrame {
 		
 		//BOTON NUEVO
 		JButton btnAgregar = new JButton("Nuevo");
+		btnAgregar.setForeground(new Color(0, 0, 128));
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				btnAgregar.addActionListener(new ActionListener() {
+				    public void actionPerformed(ActionEvent e) {
+
+				        modoNuevo = true;
+
+				        // limpiar y habilitar
+				        limpiarCamposArriba();
+				        habilitarCampos(true);
+
+				        // quitar seleccion de la tabla (por si habia una fila marcada)
+				        table.clearSelection();
+
+				        // foco al primer campo
+				        txtNombre1.requestFocus();
+				    }
+				});
 			}
 		});
 		btnAgregar.setIcon(new ImageIcon(FRMMantenimientoPaciente.class.getResource("/IMG/agregar.png")));
-		btnAgregar.setBackground(SystemColor.inactiveCaptionText);
-		btnAgregar.setBounds(33, 309, 100, 23);
-		contentPane.add(btnAgregar);							
+		btnAgregar.setBackground(new Color(0, 128, 128));
+		btnAgregar.setBounds(20, 309, 100, 23);
+		contentPane.add(btnAgregar);
+		
+			
 	}
 }
+
+		

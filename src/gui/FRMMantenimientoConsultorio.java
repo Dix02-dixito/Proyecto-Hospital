@@ -130,39 +130,40 @@ public class FRMMantenimientoConsultorio extends JFrame {
 		// BOTONES
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/IMG/agregar.png")));
-		btnAgregar.setBackground(SystemColor.inactiveCaptionText);
+		btnAgregar.setBackground(new Color(0, 128, 128));
 		btnAgregar.setBounds(35, 309, 100, 23);
 		contentPane.add(btnAgregar);
 
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
-		btnModificar.setBackground(SystemColor.inactiveCaptionText);
+		btnModificar.setBackground(new Color(0, 128, 128));
 		btnModificar.setBounds(154, 309, 100, 23);
 		contentPane.add(btnModificar);
 
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/IMG/cruz-pequena.png")));
-		btnEliminar.setBackground(SystemColor.inactiveCaptionText);
+		btnEliminar.setBackground(new Color(0, 128, 128));
 		btnEliminar.setBounds(264, 309, 100, 23);
 		contentPane.add(btnEliminar);
 
 		JButton btnGrabar = new JButton("Grabar");
 		btnGrabar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
-		btnGrabar.setBackground(SystemColor.inactiveCaptionText);
+		btnGrabar.setBackground(new Color(0, 128, 128));
 		btnGrabar.setBounds(379, 309, 100, 23);
 		contentPane.add(btnGrabar);
 
 		JButton btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/IMG/escoba.png")));
-		btnLimpiar.setBackground(SystemColor.inactiveCaptionText);
+		btnLimpiar.setBackground(new Color(0, 128, 128));
 		btnLimpiar.setBounds(488, 309, 100, 23);
 		contentPane.add(btnLimpiar);
 
 		JButton btnSalir = new JButton("Salir / Volver");
+		btnSalir.setForeground(new Color(128, 0, 0));
 		btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
 		btnSalir.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/IMG/salida.png")));
-		btnSalir.setBackground(SystemColor.inactiveCaptionText);
-		btnSalir.setBounds(467, 30, 135, 35);
+		btnSalir.setBackground(new Color(128, 128, 128));
+		btnSalir.setBounds(457, 30, 145, 35);
 		contentPane.add(btnSalir);
 
 		// TABLA
@@ -186,10 +187,11 @@ public class FRMMantenimientoConsultorio extends JFrame {
 				panel.setLayout(null);
 		
 				JButton btnBuscar = new JButton("Buscar");
+				btnBuscar.setForeground(new Color(128, 128, 0));
 				btnBuscar.setBounds(435, 10, 85, 25);
 				panel.add(btnBuscar);
 				btnBuscar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/IMG/busqueda.png")));
-				btnBuscar.setBackground(SystemColor.inactiveCaptionText);
+				btnBuscar.setBackground(SystemColor.info);
 				
 						txtBuscar = new JTextField();
 						txtBuscar.setBounds(147, 10, 254, 20);

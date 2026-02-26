@@ -13,7 +13,7 @@ public class UsuarioDAO {
     		String sql = "SELECT rol_usuario FROM usuario " +
     		             "WHERE nombre_usuario = ?" +
     				     "AND contrasena_usuario = ?" +
-    		             "AND estado_usuario + 1";
+    		             "AND estado_usuario = 1";
     		
     		PreparedStatement ps = cn.prepareStatement(sql);
     		ps.setString(1, usuario);

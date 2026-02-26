@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.*;
+import controlador.UsuarioDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,6 +30,7 @@ public class FRMLogin extends JFrame {
  }
 
  public FRMLogin() {
+ 	setIconImage(Toolkit.getDefaultToolkit().getImage(FRMLogin.class.getResource("/img/icon.png")));
 
      
      setTitle("Inicio de Sesión");
@@ -116,23 +118,22 @@ public class FRMLogin extends JFrame {
     	 String usuario = txtUsuario.getText();
     	 String password = String.valueOf(passwordcontra.getPassword());
     	 
-    	 //metodo autenticar
-    	 String rol = autenticar(usuario, password);
+    	 UsuarioDAO usuarioDAO = new UsuarioDAO();
     	 
-    	 if(rol != null) {
-    		 //Alerta de bienvenida si los datos son correctos
-    		 JOptionPane.showMessageDialog(this, "Bienvenido al hospital xd "  + usuario + " con el rol " + rol);
+    	 String rol = usuarioDAO.validarLogin(usuario, password);
+    	 
+    	 if (rol != null) {
+    	        JOptionPane.showMessageDialog(this,
+    	            "Bienvenido al hospital " + usuario + " con el rol " + rol);
+
+    	        FRMPrincipal principal = new FRMPrincipal();
+    	        principal.setVisible(true);
+    	        dispose();
+    	    } else {
+    	        JOptionPane.showMessageDialog(this,
+    	            "Nombre de usuario o contraseña incorrectos");
+    	    }
     		 
-    		 // TE MANDA A LA VENTANA PRINCIPAL
-    		 FRMPrincipal principal = new FRMPrincipal();
-    		 principal.setVisible(true);
-    		 dispose();    		 
-    		 } 
-    	 //SI LOS DATOS INGRESADOS SON INCORRECTOS
-    	 else {
-    		 //Alerta datos incorrectos
-    		 JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña son incorrectos");
-    		 }
      });
     
      JPanel panelDerecho = new JPanel();

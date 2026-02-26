@@ -32,7 +32,6 @@ public class FRMMantenimientoMedico extends JFrame {
 	private JTextField txtEspecialidad;
 	private JTextField txtCorreo;
 	private JTextField txtTelefono;
-	private JTextField txtCodigo;
 	private JTable tableMedico;
 	private JTextField txtBuscar;
 	private JTable table;
@@ -140,10 +139,6 @@ public class FRMMantenimientoMedico extends JFrame {
 		lblCodigo.setBounds(379, 98, 50, 17);
 		contentPane.add(lblCodigo);
 
-		txtCodigo = new JTextField();
-		txtCodigo.setBounds(434, 98, 100, 20);
-		contentPane.add(txtCodigo);
-
 		JLabel lblConsulta = new JLabel("Consulta");
 		lblConsulta.setBounds(33, 216, 60, 14);
 		contentPane.add(lblConsulta);
@@ -151,39 +146,40 @@ public class FRMMantenimientoMedico extends JFrame {
 		// BOTONES
 		JButton btnAgregar = new JButton("Nuevo");
 		btnAgregar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/IMG/agregar.png")));
-		btnAgregar.setBackground(SystemColor.inactiveCaptionText);
-		btnAgregar.setBounds(35, 309, 100, 23);
+		btnAgregar.setBackground(new Color(0, 128, 128));
+		btnAgregar.setBounds(27, 309, 100, 23);
 		contentPane.add(btnAgregar);
 
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
-		btnModificar.setBackground(SystemColor.inactiveCaptionText);
-		btnModificar.setBounds(154, 309, 100, 23);
+		btnModificar.setBackground(new Color(0, 128, 128));
+		btnModificar.setBounds(145, 309, 109, 23);
 		contentPane.add(btnModificar);
 
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/IMG/cruz-pequena.png")));
-		btnEliminar.setBackground(SystemColor.inactiveCaptionText);
+		btnEliminar.setBackground(new Color(0, 128, 128));
 		btnEliminar.setBounds(264, 309, 100, 23);
 		contentPane.add(btnEliminar);
 
 		JButton btnGrabar = new JButton("Grabar");
 		btnGrabar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
-		btnGrabar.setBackground(SystemColor.inactiveCaptionText);
+		btnGrabar.setBackground(new Color(0, 128, 128));
 		btnGrabar.setBounds(379, 309, 100, 23);
 		contentPane.add(btnGrabar);
 
 		JButton btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/IMG/escoba.png")));
-		btnLimpiar.setBackground(SystemColor.inactiveCaptionText);
+		btnLimpiar.setBackground(new Color(0, 128, 128));
 		btnLimpiar.setBounds(488, 309, 100, 23);
 		contentPane.add(btnLimpiar);
 
 		JButton btnSalir = new JButton("Salir / Volver");
+		btnSalir.setForeground(new Color(128, 0, 0));
 		btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
 		btnSalir.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/IMG/salida.png")));
-		btnSalir.setBackground(SystemColor.inactiveCaptionText);
-		btnSalir.setBounds(467, 30, 135, 35);
+		btnSalir.setBackground(new Color(105, 105, 105));
+		btnSalir.setBounds(435, 30, 167, 35);
 		contentPane.add(btnSalir);
 
 		// TABLA
@@ -224,9 +220,10 @@ public class FRMMantenimientoMedico extends JFrame {
 								txtBuscar.setBackground(SystemColor.scrollbar);
 								
 										JButton btnBuscar = new JButton("Buscar");
+										btnBuscar.setForeground(new Color(128, 128, 0));
 										btnBuscar.setBounds(374, 7, 89, 23);
 										panel.add(btnBuscar);
 										btnBuscar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/IMG/busqueda.png")));
-										btnBuscar.setBackground(SystemColor.inactiveCaptionText);
+										btnBuscar.setBackground(SystemColor.info);
 	}
 }
