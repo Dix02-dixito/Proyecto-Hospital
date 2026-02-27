@@ -56,15 +56,16 @@ public class FRMLogin extends JFrame {
      
      JLabel lblTitulo = new JLabel("INICIAR SESION");
      lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
-     lblTitulo.setForeground(new Color(25, 118, 210));
+     lblTitulo.setForeground(new Color(0, 128, 128));
      lblTitulo.setBounds(100, 60, 300, 30);
      panelIzquierdo.add(lblTitulo);
 
      
      JLabel lblUsuario = new JLabel("Usuario");
-     lblUsuario.setIcon(new ImageIcon(FRMLogin.class.getResource("/img/user-md.png")));
-     lblUsuario.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-     lblUsuario.setBounds(75, 130, 200, 20);
+     lblUsuario.setForeground(new Color(0, 191, 255));
+     lblUsuario.setIcon(new ImageIcon(FRMLogin.class.getResource("/img/Usuario1.png")));
+     lblUsuario.setFont(new Font("Segoe UI", Font.BOLD, 14));
+     lblUsuario.setBounds(75, 120, 200, 30);
      panelIzquierdo.add(lblUsuario);
 
      
@@ -75,10 +76,11 @@ public class FRMLogin extends JFrame {
      panelIzquierdo.add(txtUsuario);
 
      
-     JLabel lblPassword = new JLabel("Contrasena");
-     lblPassword.setIcon(new ImageIcon(FRMLogin.class.getResource("/img/password-protection (1).png")));
-     lblPassword.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-     lblPassword.setBounds(75, 210, 200, 20);
+     JLabel lblPassword = new JLabel("Contraseña");
+     lblPassword.setForeground(new Color(0, 255, 255));
+     lblPassword.setIcon(new ImageIcon(FRMLogin.class.getResource("/img/Contra.png")));
+     lblPassword.setFont(new Font("Segoe UI", Font.BOLD, 14));
+     lblPassword.setBounds(75, 196, 200, 34);
      panelIzquierdo.add(lblPassword);
 
      

@@ -258,7 +258,30 @@ public class PacienteDAO {
 
         return false;
     }
-    
+    //OBTENER COD POR NOMBRE PARA EL COMBOBOX
+    public Integer obtenerCodPorNombreCompleto(String nombreCompleto) {
+
+        String sql = "SELECT codPaciente FROM paciente " +
+                     "WHERE (nombres_paciente + ' ' + apellidos_paciente) = ? " +
+                     "AND estado_paciente = 1";
+
+        try (Connection con = ConexionBD.conectar();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, nombreCompleto);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("codPaciente");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     
     

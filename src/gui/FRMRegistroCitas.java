@@ -1,262 +1,411 @@
 package gui;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JSeparator;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.border.LineBorder;
-import java.awt.SystemColor;
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Toolkit;
 import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+
+import controlador.CitaDao;
+import controlador.ConsultorioDao;
+import controlador.MedicoDao;
+import controlador.PacienteDAO;
+import entidad.Cita;
 
 public class FRMRegistroCitas extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField txtNcita;
-	private JTextField txtEstado;
-	private JTextField txtfecha;
-	private JTextField txtHora;
-	private JTable tbldatosModificados;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FRMRegistroCitas frame = new FRMRegistroCitas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    private JPanel contentPane;
 
-	/**
-	 * Create the frame.
-	 */
-	public FRMRegistroCitas() {
-		setTitle("Registro de Citas");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(FRMRegistroCitas.class.getResource("/IMG/icon.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 797, 586);
-		contentPane = new JPanel();
-		contentPane.setBorder(null);
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Hospital Hermilio");
-		lblNewLabel.setForeground(new Color(0, 128, 128));
-		lblNewLabel.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
-		lblNewLabel.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/icon.png")));
-		lblNewLabel.setBounds(10, 11, 160, 35);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblCita = new JLabel("N° Cita");
-		lblCita.setBounds(20, 60, 34, 14);
-		contentPane.add(lblCita);
-		
-		txtNcita = new JTextField();
-		txtNcita.setBackground(SystemColor.scrollbar);
-		txtNcita.setEnabled(false);
-		txtNcita.setEditable(false);
-		txtNcita.setBounds(67, 57, 100, 20);
-		contentPane.add(txtNcita);
-		txtNcita.setColumns(10);
-		
-		JLabel lblPaciente = new JLabel("Paciente");
-		lblPaciente.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/user.png")));
-		lblPaciente.setBounds(203, 57, 64, 17);
-		contentPane.add(lblPaciente);
-		
-		JLabel lblMedico = new JLabel("Medico");
-		lblMedico.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/user-md.png")));
-		lblMedico.setBounds(496, 58, 64, 18);
-		contentPane.add(lblMedico);
-		
-		JSeparator separator1 = new JSeparator();
-		separator1.setBounds(20, 121, 359, 2);
-		contentPane.add(separator1);
-		
-		JLabel lblOtrosDatos = new JLabel("Otros Datos");
-		lblOtrosDatos.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/menu-dots.png")));
-		lblOtrosDatos.setBounds(20, 104, 100, 14);
-		contentPane.add(lblOtrosDatos);
-		
-		JLabel lblConsultorio = new JLabel("Consultorio");
-		lblConsultorio.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/building-user.png")));
-		lblConsultorio.setBounds(20, 134, 100, 24);
-		contentPane.add(lblConsultorio);
-		
-		JComboBox cbpaciente = new JComboBox();
-		cbpaciente.setBounds(277, 56, 200, 20);
-		contentPane.add(cbpaciente);
-		
-		JComboBox cbmedico = new JComboBox();
-		cbmedico.setBounds(554, 56, 200, 20);
-		contentPane.add(cbmedico);
-		
-		JComboBox cbconsultorio = new JComboBox();
-		cbconsultorio.setBackground(SystemColor.scrollbar);
-		cbconsultorio.setBounds(20, 169, 200, 20);
-		contentPane.add(cbconsultorio);
-		
-		JLabel lblEstado = new JLabel("Estado");
-		lblEstado.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/punto-pendiente.png")));
-		lblEstado.setBounds(279, 134, 76, 24);
-		contentPane.add(lblEstado);
-		
-		txtEstado = new JTextField();
-		txtEstado.setBackground(SystemColor.scrollbar);
-		txtEstado.setEditable(false);
-		txtEstado.setBounds(277, 169, 150, 20);
-		contentPane.add(txtEstado);
-		txtEstado.setColumns(10);
-		
-		JSeparator separator2 = new JSeparator();
-		separator2.setBounds(20, 236, 359, 2);
-		contentPane.add(separator2);
-		
-		JLabel lblHorario = new JLabel(" Horario");
-		lblHorario.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/calendar.png")));
-		lblHorario.setBounds(20, 211, 64, 20);
-		contentPane.add(lblHorario);
-		
-		JLabel lblFecha = new JLabel("Fecha");
-		lblFecha.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/calendario.png")));
-		lblFecha.setBounds(20, 249, 81, 25);
-		contentPane.add(lblFecha);
-		
-		txtfecha = new JTextField();
-		txtfecha.setBackground(SystemColor.scrollbar);
-		txtfecha.setBounds(20, 280, 200, 20);
-		contentPane.add(txtfecha);
-		txtfecha.setColumns(10);
-		
-		JLabel lblHora = new JLabel("Hora");
-		lblHora.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/reloj.png")));
-		lblHora.setBounds(257, 249, 58, 25);
-		contentPane.add(lblHora);
-		
-		txtHora = new JTextField();
-		txtHora.setBackground(SystemColor.scrollbar);
-		txtHora.setColumns(10);
-		txtHora.setBounds(255, 280, 200, 20);
-		contentPane.add(txtHora);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 342, 696, 152);
-		contentPane.add(scrollPane);
-		
-		tbldatosModificados = new JTable();
-		tbldatosModificados.setRowSelectionAllowed(false);
-		tbldatosModificados.setEnabled(false);
-		tbldatosModificados.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"N\u00B0 Cita", "Paciente", "Medico", "Consultorio", "Fecha", "Hora", "Estado"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, Object.class, String.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		scrollPane.setViewportView(tbldatosModificados);
-		tbldatosModificados.setBorder(new LineBorder(SystemColor.desktop));
-		
-		JButton btnNuevo = new JButton("Nuevo");
-		btnNuevo.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/agregar.png")));
-		btnNuevo.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
-		btnNuevo.setBackground(new Color(0, 128, 128));
-		btnNuevo.setBounds(30, 505, 125, 25);
-		contentPane.add(btnNuevo);
-		
-		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
-		btnGuardar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
-		btnGuardar.setBackground(new Color(0, 128, 128));
-		btnGuardar.setBounds(165, 505, 125, 25);
-		contentPane.add(btnGuardar);
-		
-		JButton btnModificar = new JButton("Modificar");
-		btnModificar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
-		btnModificar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
-		btnModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnModificar.setBackground(new Color(0, 128, 128));
-		btnModificar.setBounds(300, 505, 125, 25);
-		contentPane.add(btnModificar);
-		
-		JButton btnCancelarCita = new JButton("Cancelar Cita");
-		btnCancelarCita.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/cruz-pequena.png")));
-		btnCancelarCita.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
-		btnCancelarCita.setBackground(new Color(0, 128, 128));
-		btnCancelarCita.setBounds(435, 505, 146, 25);
-		contentPane.add(btnCancelarCita);
-		
-		JButton btnLimpiar = new JButton("Limpiar");
-		btnLimpiar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/escoba.png")));
-		btnLimpiar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnLimpiar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
-		btnLimpiar.setBackground(new Color(0, 128, 128));
-		btnLimpiar.setBounds(591, 505, 125, 25);
-		contentPane.add(btnLimpiar);
-		
-		JButton btnSalir = new JButton("Salir / Volver");
-		btnSalir.setForeground(new Color(128, 0, 0));
-		btnSalir.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/salida.png")));
-		btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
-		btnSalir.setBackground(new Color(128, 128, 128));
-		btnSalir.setBounds(621, 14, 150, 30);
-		contentPane.add(btnSalir);
-		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 44, 258, 2);
-		contentPane.add(separator);
-		
-		JLabel lblDatosModificados = new JLabel("Datos Modificados:");
-		lblDatosModificados.setBounds(30, 311, 110, 14);
-		contentPane.add(lblDatosModificados);
+    private JTextField txtNcita;
+    private JTextField txtfecha;
+    private JTextField txtHora;
+    private JTextField txtMotivo;
 
-	}
+    private JComboBox<String> cbPaciente;
+    private JComboBox<String> cbMedico;
+    private JComboBox<String> cbConsultorio;
+
+    private JTable tbldatosModificados;
+
+    private JButton btnNuevo;
+    private JButton btnGuardar;
+    private JButton btnLimpiar;
+
+    // DAOS
+    private final PacienteDAO pacienteDAO = new PacienteDAO();
+    private final MedicoDao medicoDao = new MedicoDao();
+    private final ConsultorioDao consultorioDao = new ConsultorioDao();
+    private final CitaDao citaDao = new CitaDao();
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            try {
+                FRMRegistroCitas frame = new FRMRegistroCitas();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public FRMRegistroCitas() {
+        setTitle("Registro de Citas");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(FRMRegistroCitas.class.getResource("/IMG/icon.png")));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 762, 700);
+
+        contentPane = new JPanel();
+        contentPane.setBorder(null);
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JButton btnSalir = new JButton("Salir / Volver");
+        btnSalir.addActionListener(e -> dispose());
+        btnSalir.setVerticalAlignment(SwingConstants.TOP);
+        btnSalir.setBounds(582, 23, 150, 30);
+        btnSalir.setForeground(new Color(128, 0, 0));
+        btnSalir.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/salida.png")));
+        btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
+        btnSalir.setBackground(new Color(192, 192, 192));
+        contentPane.add(btnSalir);
+
+        JLabel lblTitulo = new JLabel("Registro de Citas");
+        lblTitulo.setBounds(0, 5, 268, 59);
+        lblTitulo.setForeground(new Color(0, 128, 128));
+        lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        lblTitulo.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/img/logo.png")));
+        contentPane.add(lblTitulo);
+
+        // ===================== PANEL REGISTRAR =====================
+        JPanel panelRegistrarCitas = new JPanel();
+        panelRegistrarCitas.setBorder(new CompoundBorder(
+                new LineBorder(new Color(128, 128, 128)),
+                new LineBorder(new Color(0, 206, 209))
+        ));
+        panelRegistrarCitas.setBackground(new Color(220, 220, 220));
+        panelRegistrarCitas.setBounds(20, 73, 686, 296);
+        contentPane.add(panelRegistrarCitas);
+        panelRegistrarCitas.setLayout(null);
+
+        JLabel lblRegistrar = new JLabel("Registrar Citas");
+        lblRegistrar.setBounds(10, 11, 153, 27);
+        lblRegistrar.setForeground(new Color(0, 128, 128));
+        lblRegistrar.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        lblRegistrar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/img/imglogo33.png")));
+        panelRegistrarCitas.add(lblRegistrar);
+
+        JLabel lblCita = new JLabel("N° Cita");
+        lblCita.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+        lblCita.setBounds(12, 49, 62, 14);
+        panelRegistrarCitas.add(lblCita);
+
+        txtNcita = new JTextField();
+        txtNcita.setBounds(10, 68, 100, 25);
+        txtNcita.setBackground(new Color(245, 255, 250));
+        txtNcita.setColumns(10);
+        txtNcita.setEditable(false);
+        panelRegistrarCitas.add(txtNcita);
+
+        JLabel lblPaciente = new JLabel("Paciente");
+        lblPaciente.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+        lblPaciente.setBounds(144, 48, 90, 17);
+        lblPaciente.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/img/NombreApellidos.png")));
+        panelRegistrarCitas.add(lblPaciente);
+
+        cbPaciente = new JComboBox<>();
+        cbPaciente.setBounds(142, 69, 250, 25);
+        panelRegistrarCitas.add(cbPaciente);
+
+        JLabel lblMedico = new JLabel("Medico");
+        lblMedico.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+        lblMedico.setBounds(424, 48, 90, 16);
+        lblMedico.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/img/EspecialidadMedico.png")));
+        panelRegistrarCitas.add(lblMedico);
+
+        cbMedico = new JComboBox<>();
+        cbMedico.setBounds(422, 68, 250, 25);
+        panelRegistrarCitas.add(cbMedico);
+
+        JLabel lblConsultorio = new JLabel("Consultorio");
+        lblConsultorio.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+        lblConsultorio.setBounds(12, 114, 120, 24);
+        lblConsultorio.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/img/consultorio-medico.png")));
+        panelRegistrarCitas.add(lblConsultorio);
+
+        cbConsultorio = new JComboBox<>();
+        cbConsultorio.setBounds(10, 137, 200, 25);
+        cbConsultorio.setBackground(new Color(245, 255, 250));
+        panelRegistrarCitas.add(cbConsultorio);
+
+        JLabel lblMotivo = new JLabel("Motivo");
+        lblMotivo.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/img/Motivo.png")));
+        lblMotivo.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+        lblMotivo.setBounds(246, 114, 90, 24);
+        panelRegistrarCitas.add(lblMotivo);
+
+        txtMotivo = new JTextField();
+        txtMotivo.setColumns(10);
+        txtMotivo.setBackground(new Color(245, 255, 250));
+        txtMotivo.setBounds(244, 137, 428, 25);
+        panelRegistrarCitas.add(txtMotivo);
+
+        JLabel lblHorario = new JLabel(" Horario");
+        lblHorario.setForeground(new Color(0, 128, 128));
+        lblHorario.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        lblHorario.setBounds(10, 192, 80, 20);
+        lblHorario.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/calendar.png")));
+        panelRegistrarCitas.add(lblHorario);
+
+        JSeparator separator2 = new JSeparator();
+        separator2.setForeground(new Color(105, 105, 105));
+        separator2.setBackground(new Color(105, 105, 105));
+        separator2.setBounds(10, 212, 226, 16);
+        panelRegistrarCitas.add(separator2);
+
+        JLabel lblFecha = new JLabel("Fecha");
+        lblFecha.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+        lblFecha.setBounds(12, 225, 81, 25);
+        lblFecha.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/calendario.png")));
+        panelRegistrarCitas.add(lblFecha);
+
+        txtfecha = new JTextField();
+        txtfecha.setBounds(10, 250, 200, 25);
+        txtfecha.setBackground(new Color(245, 255, 250));
+        txtfecha.setColumns(10);
+        panelRegistrarCitas.add(txtfecha);
+
+        JLabel lblHora = new JLabel("Hora");
+        lblHora.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+        lblHora.setBounds(246, 225, 58, 25);
+        lblHora.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/reloj.png")));
+        panelRegistrarCitas.add(lblHora);
+
+        txtHora = new JTextField();
+        txtHora.setBounds(244, 250, 200, 25);
+        txtHora.setBackground(new Color(245, 255, 250));
+        txtHora.setColumns(10);
+        panelRegistrarCitas.add(txtHora);
+
+        // editable para que el usuario pueda escribir (si quiere)
+        cbPaciente.setEditable(true);
+        cbMedico.setEditable(true);
+        cbConsultorio.setEditable(true);
+
+        // ===================== PANEL TABLA =====================
+        JPanel panelTabla = new JPanel();
+        panelTabla.setBorder(new CompoundBorder(
+                new LineBorder(new Color(128, 128, 128)),
+                new LineBorder(new Color(0, 128, 128))
+        ));
+        panelTabla.setBackground(new Color(220, 220, 220));
+        panelTabla.setBounds(20, 383, 686, 221);
+        contentPane.add(panelTabla);
+        panelTabla.setLayout(null);
+
+        JLabel lblCitasRegistradas = new JLabel("Citas Registradas (Nuevas)");
+        lblCitasRegistradas.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/img/agregar (1).png")));
+        lblCitasRegistradas.setForeground(new Color(0, 128, 128));
+        lblCitasRegistradas.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        lblCitasRegistradas.setBounds(12, 7, 250, 24);
+        panelTabla.add(lblCitasRegistradas);
+
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(10, 33, 664, 180);
+        panelTabla.add(scrollPane);
+
+        tbldatosModificados = new JTable();
+        tbldatosModificados.setModel(new DefaultTableModel(
+                new Object[][]{},
+                new String[]{"N° Cita", "Paciente", "Medico", "Consultorio", "Fecha", "Hora", "Motivo"}
+        ));
+        scrollPane.setViewportView(tbldatosModificados);
+
+        // ===================== BOTONES =====================
+        btnNuevo = new JButton("Nuevo");
+        btnNuevo.setBounds(20, 618, 125, 25);
+        btnNuevo.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/agregar.png")));
+        btnNuevo.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
+        btnNuevo.setBackground(new Color(0, 128, 128));
+        contentPane.add(btnNuevo);
+
+        btnGuardar = new JButton("Guardar");
+        btnGuardar.setBounds(155, 618, 125, 25);
+        btnGuardar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
+        btnGuardar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
+        btnGuardar.setBackground(new Color(0, 128, 128));
+        contentPane.add(btnGuardar);
+
+        btnLimpiar = new JButton("Limpiar");
+        btnLimpiar.setBounds(567, 618, 125, 25);
+        btnLimpiar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/escoba.png")));
+        btnLimpiar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
+        btnLimpiar.setBackground(new Color(128, 128, 0));
+        contentPane.add(btnLimpiar);
+
+        // ===================== EVENTOS =====================
+
+        btnNuevo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                limpiarFormulario();
+                habilitarFormulario(true);
+                cbPaciente.requestFocus();
+            }
+        });
+
+        btnLimpiar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                limpiarFormulario();
+                cbPaciente.requestFocus();
+            }
+        });
+
+        // GUARDAR: guarda lo de arriba y agrega SOLO esa fila a la tabla
+        btnGuardar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                if (!validar()) return;
+
+                String pacienteTxt = cbPaciente.getEditor().getItem().toString().trim();
+                String medicoTxt = cbMedico.getEditor().getItem().toString().trim();
+                String consultorioTxt = cbConsultorio.getEditor().getItem().toString().trim();
+
+                Integer codPaciente = pacienteDAO.obtenerCodPorNombreCompleto(pacienteTxt);
+                Integer codMedico = medicoDao.obtenerCodPorNombreCompleto(medicoTxt);
+                Integer codConsultorio = consultorioDao.obtenerCodPorNombre(consultorioTxt);
+
+                if (codPaciente == null || codMedico == null || codConsultorio == null) {
+                    msg("Selecciona un Paciente/Médico/Consultorio válido de la lista.");
+                    return;
+                }
+
+                Cita c = new Cita(
+                        0,
+                        codPaciente,
+                        codMedico,
+                        codConsultorio,
+                        txtfecha.getText().trim(), // yyyy-MM-dd
+                        txtHora.getText().trim(),  // HH:mm:ss
+                        1,
+                        txtMotivo.getText().trim()
+                );
+
+                Integer numGenerado = citaDao.insertarYRetornarNumCita(c);
+
+                if (numGenerado != null) {
+                    msg("Cita registrada ✅");
+                    
+                    txtNcita.setText(String.valueOf(numGenerado));
+
+                    // SOLO agrega la cita recién creada (NO recargar de BD)
+                    DefaultTableModel model = (DefaultTableModel) tbldatosModificados.getModel();
+                    model.addRow(new Object[]{
+                        numGenerado,
+                        pacienteTxt,
+                        medicoTxt,
+                        consultorioTxt,
+                        txtfecha.getText().trim(),
+                        txtHora.getText().trim(),
+                        txtMotivo.getText().trim()
+                    });
+                    
+                    limpiarFormulario();
+                    habilitarFormulario(false);
+
+                } else {
+                    msg("No se pudo guardar (choque de horario o error).");
+                }
+            }
+        });
+
+        // ===================== ARRANQUE =====================
+        cargarCombos();
+        habilitarFormulario(false);
+
+        // Tabla empieza vacía (solo nuevos)
+        // NO cargamos citas antiguas.
+    }
+
+    // ===================== METODOS =====================
+
+    private void msg(String texto) {
+        javax.swing.JOptionPane.showMessageDialog(this, texto);
+    }
+
+    private void habilitarFormulario(boolean estado) {
+        cbPaciente.setEnabled(estado);
+        cbMedico.setEnabled(estado);
+        cbConsultorio.setEnabled(estado);
+
+        txtfecha.setEnabled(estado);
+        txtHora.setEnabled(estado);
+        txtMotivo.setEnabled(estado);
+
+        btnGuardar.setEnabled(estado);
+
+        // numCita lo genera la BD
+        txtNcita.setEnabled(true);
+        txtNcita.setEditable(false);
+    }
+
+    private void limpiarFormulario() {
+        cbPaciente.setSelectedItem(null);
+        cbMedico.setSelectedItem(null);
+        cbConsultorio.setSelectedItem(null);
+
+        txtfecha.setText("");
+        txtHora.setText("");
+        txtMotivo.setText("");
+        txtNcita.setText("");
+    }
+
+    private void cargarCombos() {
+        cbPaciente.removeAllItems();
+        for (var p : pacienteDAO.listarActivos()) {
+            cbPaciente.addItem(p.getNombres() + " " + p.getApellidos());
+        }
+
+        cbMedico.removeAllItems();
+        for (var m : medicoDao.listarActivos()) {
+            cbMedico.addItem(m.getNombres() + " " + m.getApellidos());
+        }
+
+        cbConsultorio.removeAllItems();
+        for (var c : consultorioDao.listarActivos()) {
+            cbConsultorio.addItem(c.getNombre());
+        }
+    }
+
+    private boolean validar() {
+        String p = cbPaciente.getEditor().getItem().toString().trim();
+        String m = cbMedico.getEditor().getItem().toString().trim();
+        String co = cbConsultorio.getEditor().getItem().toString().trim();
+
+        if (p.isEmpty()) { msg("Ingrese/Seleccione un paciente"); return false; }
+        if (m.isEmpty()) { msg("Ingrese/Seleccione un médico"); return false; }
+        if (co.isEmpty()) { msg("Ingrese/Seleccione un consultorio"); return false; }
+
+        if (txtfecha.getText().trim().isEmpty()) { msg("Ingrese la fecha (yyyy-MM-dd)"); return false; }
+        if (txtHora.getText().trim().isEmpty()) { msg("Ingrese la hora (HH:mm:ss)"); return false; }
+        if (txtMotivo.getText().trim().isEmpty()) { msg("Ingrese el motivo"); return false; }
+
+        return true;
+    }
 }
