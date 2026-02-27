@@ -123,10 +123,10 @@ public class FRMPrincipal extends JFrame {
         
 
         // titulo del menu lateral
-        JLabel lbltitulo_1 = new JLabel("ventana principal");
+        JLabel lbltitulo_1 = new JLabel("VENTANA PRINCIPAL");
         lbltitulo_1.setBounds(10, 31, 210, 30);
         lbltitulo_1.setForeground(new Color(30, 144, 255)); // color azul dodger
-        lbltitulo_1.setFont(new Font("segoe ui", Font.BOLD, 18));
+        lbltitulo_1.setFont(new Font("Segoe UI", Font.BOLD, 20));
         panelmenu.add(lbltitulo_1);
 
         // separador visual debajo del titulo

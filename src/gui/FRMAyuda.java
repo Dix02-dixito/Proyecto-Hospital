@@ -76,7 +76,7 @@ public class FRMAyuda extends JFrame {
 		listEstudiantes.setForeground(new Color(102, 205, 170));
 		listEstudiantes.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
 		listEstudiantes.setModel(new AbstractListModel() {
-			String[] values = new String[] {"", "", "", "", "", "", "", "", "                 Nombres y Apellidos                 ||          Apodos", " ==================================================================", "                • Jesus Angel Rivera Villanueva     (Dix tu carry)", "                • Daniel Alfredo Ostos Uchpa        (RompeTelitas)", "                • Nery Jessica Migo Salazar            ", "                • Nicole Angelina Guevara Buiza   (Niki)", "                • Joseph Bautista Marquez             (Buyu)"};
+			String[] values = new String[] {"", "", "", "", "", "                 SISTEMA HOSPITAL", "", "   Curso : Algoritmia y estructura de datos", "   Profesora : DONNA JULISSA LINDO SANCHEZ", "", "", "                         INTEGRANTE                        //  APODOS", " ==================================================================", "                • Jesus Angel Rivera Villanueva     (Dix tu carry)", "                • Daniel Alfredo Ostos Uchpa        (RompeTelitas)", "                • Nery Jessica Migo Salazar            ", "                • Nicole Angelina Guevara Buiza   (Niki)", "                • Joseph Bautista Marquez             (Buyu)"};
 			public int getSize() {
 				return values.length;
 			}
@@ -88,10 +88,11 @@ public class FRMAyuda extends JFrame {
 		listEstudiantes.setVisibleRowCount(10);
 		listEstudiantes.setBackground(new Color(47, 79, 79));
 		listEstudiantes.setToolTipText("");
-		listEstudiantes.setBounds(31, 72, 580, 213);
+		listEstudiantes.setBounds(31, 72, 580, 239);
 		bgsecundario.add(listEstudiantes);
 		
 		JLabel lblSubtitulo = new JLabel("Integrantes :");
+		lblSubtitulo.setForeground(new Color(0, 255, 255));
 		lblSubtitulo.setFont(new Font("Segoe UI Symbol", Font.BOLD, 15));
 		lblSubtitulo.setBounds(10, 25, 106, 23);
 		bgsecundario.add(lblSubtitulo);

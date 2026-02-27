@@ -48,12 +48,14 @@ public class FRMRegistroCitas extends JFrame {
     private JButton btnNuevo;
     private JButton btnGuardar;
     private JButton btnLimpiar;
-
-    // DAOS
+    
+    //DAOS
     private final PacienteDAO pacienteDAO = new PacienteDAO();
     private final MedicoDao medicoDao = new MedicoDao();
     private final ConsultorioDao consultorioDao = new ConsultorioDao();
     private final CitaDao citaDao = new CitaDao();
+    
+    
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -64,7 +66,9 @@ public class FRMRegistroCitas extends JFrame {
                 e.printStackTrace();
             }
         });
+        
     }
+    
 
     public FRMRegistroCitas() {
         setTitle("Registro de Citas");
@@ -78,13 +82,20 @@ public class FRMRegistroCitas extends JFrame {
         contentPane.setLayout(null);
 
         JButton btnSalir = new JButton("Salir / Volver");
-        btnSalir.addActionListener(e -> dispose());
         btnSalir.setVerticalAlignment(SwingConstants.TOP);
         btnSalir.setBounds(582, 23, 150, 30);
         btnSalir.setForeground(new Color(128, 0, 0));
         btnSalir.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/salida.png")));
         btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
         btnSalir.setBackground(new Color(192, 192, 192));
+        btnSalir.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //
+                FRMPrincipal principal = new FRMPrincipal();
+                principal.setVisible(true);
+                dispose();
+            }
+        });
         contentPane.add(btnSalir);
 
         JLabel lblTitulo = new JLabel("Registro de Citas");
@@ -180,9 +191,9 @@ public class FRMRegistroCitas extends JFrame {
         separator2.setBounds(10, 212, 226, 16);
         panelRegistrarCitas.add(separator2);
 
-        JLabel lblFecha = new JLabel("Fecha");
+        JLabel lblFecha = new JLabel("Fecha YYYY-MM-DD");
         lblFecha.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-        lblFecha.setBounds(12, 225, 81, 25);
+        lblFecha.setBounds(12, 225, 120, 25);
         lblFecha.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/calendario.png")));
         panelRegistrarCitas.add(lblFecha);
 
@@ -192,9 +203,9 @@ public class FRMRegistroCitas extends JFrame {
         txtfecha.setColumns(10);
         panelRegistrarCitas.add(txtfecha);
 
-        JLabel lblHora = new JLabel("Hora");
+        JLabel lblHora = new JLabel("Hora HH:MM:SS");
         lblHora.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-        lblHora.setBounds(246, 225, 58, 25);
+        lblHora.setBounds(246, 225, 112, 25);
         lblHora.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/reloj.png")));
         panelRegistrarCitas.add(lblHora);
 
@@ -204,10 +215,10 @@ public class FRMRegistroCitas extends JFrame {
         txtHora.setColumns(10);
         panelRegistrarCitas.add(txtHora);
 
-        // editable para que el usuario pueda escribir (si quiere)
-        cbPaciente.setEditable(true);
-        cbMedico.setEditable(true);
-        cbConsultorio.setEditable(true);
+       
+        cbPaciente.setEditable(false);
+        cbMedico.setEditable(false);
+        cbConsultorio.setEditable(false);
 
         // ===================== PANEL TABLA =====================
         JPanel panelTabla = new JPanel();
@@ -240,48 +251,52 @@ public class FRMRegistroCitas extends JFrame {
 
         // ===================== BOTONES =====================
         btnNuevo = new JButton("Nuevo");
-        btnNuevo.setBounds(20, 618, 125, 25);
+        btnNuevo.setBounds(20, 615, 125, 25);
         btnNuevo.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/agregar.png")));
         btnNuevo.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
         btnNuevo.setBackground(new Color(0, 128, 128));
         contentPane.add(btnNuevo);
 
         btnGuardar = new JButton("Guardar");
-        btnGuardar.setBounds(155, 618, 125, 25);
+        btnGuardar.setBounds(155, 615, 125, 25);
         btnGuardar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
         btnGuardar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
         btnGuardar.setBackground(new Color(0, 128, 128));
         contentPane.add(btnGuardar);
 
         btnLimpiar = new JButton("Limpiar");
-        btnLimpiar.setBounds(567, 618, 125, 25);
+        btnLimpiar.setBounds(582, 615, 125, 25);
         btnLimpiar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/escoba.png")));
         btnLimpiar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
         btnLimpiar.setBackground(new Color(128, 128, 0));
         contentPane.add(btnLimpiar);
 
-        // ===================== EVENTOS =====================
+        // ===================== EVENTOS=====================
 
         btnNuevo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                limpiarFormulario();
+            	limpiarFormulario();
                 habilitarFormulario(true);
                 cbPaciente.requestFocus();
+
             }
         });
 
         btnLimpiar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                limpiarFormulario();
-                cbPaciente.requestFocus();
+            	cbPaciente.setSelectedItem(null);
+                cbMedico.setSelectedItem(null);
+                cbConsultorio.setSelectedItem(null);
+
+                txtfecha.setText("");
+                txtHora.setText("");
+                txtMotivo.setText("");
             }
         });
 
-        // GUARDAR: guarda lo de arriba y agrega SOLO esa fila a la tabla
         btnGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-                if (!validar()) return;
+            	if (!validar()) return;
 
                 String pacienteTxt = cbPaciente.getEditor().getItem().toString().trim();
                 String medicoTxt = cbMedico.getEditor().getItem().toString().trim();
@@ -292,7 +307,7 @@ public class FRMRegistroCitas extends JFrame {
                 Integer codConsultorio = consultorioDao.obtenerCodPorNombre(consultorioTxt);
 
                 if (codPaciente == null || codMedico == null || codConsultorio == null) {
-                    msg("Selecciona un Paciente/Médico/Consultorio válido de la lista.");
+                    msg("Selecciona un Paciente/Médico/Consultorio valido ");
                     return;
                 }
 
@@ -301,8 +316,8 @@ public class FRMRegistroCitas extends JFrame {
                         codPaciente,
                         codMedico,
                         codConsultorio,
-                        txtfecha.getText().trim(), // yyyy-MM-dd
-                        txtHora.getText().trim(),  // HH:mm:ss
+                        txtfecha.getText().trim(), // año-Mes-dia
+                        txtHora.getText().trim(),  // Hora:minuto:segundos
                         1,
                         txtMotivo.getText().trim()
                 );
@@ -310,45 +325,35 @@ public class FRMRegistroCitas extends JFrame {
                 Integer numGenerado = citaDao.insertarYRetornarNumCita(c);
 
                 if (numGenerado != null) {
-                    msg("Cita registrada ✅");
-                    
-                    txtNcita.setText(String.valueOf(numGenerado));
+                    msg("Cita registrada CORRECTAMENTE");
 
-                    // SOLO agrega la cita recién creada (NO recargar de BD)
-                    DefaultTableModel model = (DefaultTableModel) tbldatosModificados.getModel();
-                    model.addRow(new Object[]{
-                        numGenerado,
-                        pacienteTxt,
-                        medicoTxt,
-                        consultorioTxt,
-                        txtfecha.getText().trim(),
-                        txtHora.getText().trim(),
-                        txtMotivo.getText().trim()
-                    });
+                    String fecha = txtfecha.getText().trim();
+                    String hora = txtHora.getText().trim();
+                    String motivo = txtMotivo.getText().trim();
+
+                    agregarFilaTabla(numGenerado, pacienteTxt, medicoTxt, consultorioTxt, fecha, hora, motivo);
+
                     
-                    limpiarFormulario();
+                    
                     habilitarFormulario(false);
-
                 } else {
-                    msg("No se pudo guardar (choque de horario o error).");
+                    msg("No se pudo guardar");
                 }
             }
-        });
 
-        // ===================== ARRANQUE =====================
+            
+        });
+        
+        
         cargarCombos();
         habilitarFormulario(false);
+        limpiarFormulario();
 
-        // Tabla empieza vacía (solo nuevos)
-        // NO cargamos citas antiguas.
+        
     }
-
-    // ===================== METODOS =====================
-
-    private void msg(String texto) {
-        javax.swing.JOptionPane.showMessageDialog(this, texto);
-    }
-
+    
+    
+    //LIMPIA LOS CAMPOS DE LA PARTE DE ARRIBA
     private void habilitarFormulario(boolean estado) {
         cbPaciente.setEnabled(estado);
         cbMedico.setEnabled(estado);
@@ -364,7 +369,8 @@ public class FRMRegistroCitas extends JFrame {
         txtNcita.setEnabled(true);
         txtNcita.setEditable(false);
     }
-
+    
+    //LIMPIA LOS CAMPOS
     private void limpiarFormulario() {
         cbPaciente.setSelectedItem(null);
         cbMedico.setSelectedItem(null);
@@ -376,6 +382,7 @@ public class FRMRegistroCitas extends JFrame {
         txtNcita.setText("");
     }
 
+    //CARGO LOS DATOS PACIENTE MEDICO CONSULTORIO EN LOS COMBOBOX
     private void cargarCombos() {
         cbPaciente.removeAllItems();
         for (var p : pacienteDAO.listarActivos()) {
@@ -392,20 +399,58 @@ public class FRMRegistroCitas extends JFrame {
             cbConsultorio.addItem(c.getNombre());
         }
     }
+    
+    //ALERTA DE MSG PARA LOS CAMPOS NO RELLENADOS CORRECTAMENTE
+    private void msg(String texto) {
+        javax.swing.JOptionPane.showMessageDialog(this, texto);
+    }
 
+
+    //VALIDA SI LOS CAMPOS ESTAN RELLENADOS CORRECTAMENTE SI NO ESTAN RELLENADOS DEVUELVE LA ALERTA CREADA
     private boolean validar() {
-        String p = cbPaciente.getEditor().getItem().toString().trim();
-        String m = cbMedico.getEditor().getItem().toString().trim();
-        String co = cbConsultorio.getEditor().getItem().toString().trim();
 
-        if (p.isEmpty()) { msg("Ingrese/Seleccione un paciente"); return false; }
-        if (m.isEmpty()) { msg("Ingrese/Seleccione un médico"); return false; }
-        if (co.isEmpty()) { msg("Ingrese/Seleccione un consultorio"); return false; }
+        if (cbPaciente.getSelectedItem() == null) { msg("Seleccione un paciente"); return false; }
+        if (cbMedico.getSelectedItem() == null) { msg("Seleccione un medico"); return false; }
+        if (cbConsultorio.getSelectedItem() == null) { msg("Seleccione un consultorio"); return false; }
 
-        if (txtfecha.getText().trim().isEmpty()) { msg("Ingrese la fecha (yyyy-MM-dd)"); return false; }
-        if (txtHora.getText().trim().isEmpty()) { msg("Ingrese la hora (HH:mm:ss)"); return false; }
-        if (txtMotivo.getText().trim().isEmpty()) { msg("Ingrese el motivo"); return false; }
+        String f = txtfecha.getText().trim();
+        String h = txtHora.getText().trim();
+
+        if (txtMotivo.getText().trim().isEmpty()) { msg("ingrese un motivo"); return false; }
+
+        // validar formato fecha año-mes-dia
+        if (!f.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            msg("Fecha inválida. Use: yyyy-MM-dd (Ej: 2026-02-21)");
+            return false;
+        }
+
+        // validar formato hora hora:minuto:segundo
+        if (!h.matches("\\d{2}:\\d{2}:\\d{2}")) {
+            msg("Hora inválida. Use: hora:minuto:segundo (Ej: 09:00:00)");
+            return false;
+        }
+
+        // validar que Date.valueOf y Time.valueOf no fallen
+        try {
+            java.sql.Date.valueOf(f);
+        } catch (Exception e) {
+            msg("Fecha no valida (revise el dia/mes). Ej: 2026-02-21");
+            return false;
+        }
+
+        try {
+            java.sql.Time.valueOf(h);
+        } catch (Exception e) {
+            msg("Hora ingresada no valida. Ej: 09:00:00");
+            return false;
+        }
 
         return true;
+    }
+    
+    //AGREGA LA CITA REGISTRADA A LA JTABLE PARA VISUALIZAR LOS DATOS DE LA CITA
+    private void agregarFilaTabla(int numCita, String paciente, String medico, String consultorio, String fecha, String hora, String motivo) {
+        DefaultTableModel model = (DefaultTableModel) tbldatosModificados.getModel();
+        model.addRow(new Object[] { numCita, paciente, medico, consultorio, fecha, hora, motivo });
     }
 }

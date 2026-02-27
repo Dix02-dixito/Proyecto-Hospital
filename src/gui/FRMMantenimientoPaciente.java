@@ -449,7 +449,7 @@ public class FRMMantenimientoPaciente extends JFrame {
 				FRMPrincipal principal = new FRMPrincipal();
 				principal.setVisible(true);
 
-				dispose(); // Cierra el formulario actual
+				dispose(); // cierra la ventana actual
 				
 			}
 		});

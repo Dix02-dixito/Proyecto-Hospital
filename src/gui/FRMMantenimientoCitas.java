@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JRadioButton;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 public class FRMMantenimientoCitas extends JFrame {
 
@@ -54,6 +55,8 @@ public class FRMMantenimientoCitas extends JFrame {
 	 * Create the frame.
 	 */
 	public FRMMantenimientoCitas() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FRMMantenimientoCitas.class.getResource("/img/icon.png")));
+		setTitle("Mantenimiento Citas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 762, 813);
 		contentPane = new JPanel();
