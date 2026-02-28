@@ -68,7 +68,7 @@ public class FRMConsulta extends JFrame {
     }
 
     public FRMConsulta() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(FRMConsulta.class.getResource("/IMG/icon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(FRMConsulta.class.getResource("/img/icon.png")));
         setTitle("Consulta de Citas");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 650, 746);
@@ -87,7 +87,7 @@ public class FRMConsulta extends JFrame {
 
         btnSalir = new JButton("Salir / Volver");
         btnSalir.setForeground(new Color(128, 0, 0));
-        btnSalir.setIcon(new ImageIcon(FRMConsulta.class.getResource("/IMG/salida.png")));
+        btnSalir.setIcon(new ImageIcon(FRMConsulta.class.getResource("/img/salida.png")));
         btnSalir.setBackground(new Color(220, 220, 220));
         btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
         btnSalir.setBounds(447, 11, 176, 34);
@@ -195,12 +195,12 @@ public class FRMConsulta extends JFrame {
         btnConsultar.setForeground(new Color(0, 255, 0));
         btnConsultar.setBounds(20, 246, 125, 30);
         panelConsultar.add(btnConsultar);
-        btnConsultar.setIcon(new ImageIcon(FRMConsulta.class.getResource("/IMG/busqueda.png")));
+        btnConsultar.setIcon(new ImageIcon(FRMConsulta.class.getResource("/img/busqueda.png")));
         btnConsultar.setBackground(new Color(0, 128, 128));
         btnConsultar.setFont(new Font("Segoe UI", Font.BOLD, 12));
 
         btnLimpiarConsultar = new JButton("Limpiar");
-        btnLimpiarConsultar.setIcon(new ImageIcon(FRMConsulta.class.getResource("/IMG/escoba.png")));
+        btnLimpiarConsultar.setIcon(new ImageIcon(FRMConsulta.class.getResource("/img/escoba.png")));
         btnLimpiarConsultar.setForeground(new Color(255, 215, 0));
         btnLimpiarConsultar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
         btnLimpiarConsultar.setBackground(new Color(128, 128, 0));
@@ -246,7 +246,7 @@ public class FRMConsulta extends JFrame {
         btnLimpiarListaCitas.setForeground(new Color(255, 215, 0));
         btnLimpiarListaCitas.setBounds(20, 263, 125, 30);
         panelListaCitas.add(btnLimpiarListaCitas);
-        btnLimpiarListaCitas.setIcon(new ImageIcon(FRMConsulta.class.getResource("/IMG/escoba.png")));
+        btnLimpiarListaCitas.setIcon(new ImageIcon(FRMConsulta.class.getResource("/img/escoba.png")));
         btnLimpiarListaCitas.setBackground(new Color(128, 128, 0));
         btnLimpiarListaCitas.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
 

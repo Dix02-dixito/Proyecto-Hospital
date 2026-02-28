@@ -203,7 +203,7 @@ public class FRMMantenimientoConsultorio extends JFrame {
 	public FRMMantenimientoConsultorio() {
 
 		setTitle("Mantenimiento Consultorios");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(FRMMantenimientoConsultorio.class.getResource("/IMG/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FRMMantenimientoConsultorio.class.getResource("/img/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 720, 674);
 
@@ -222,7 +222,7 @@ public class FRMMantenimientoConsultorio extends JFrame {
 		JButton btnSalir = new JButton("Salir / Volver");
 		btnSalir.setForeground(new Color(128, 0, 0));
 		btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
-		btnSalir.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/IMG/salida.png")));
+		btnSalir.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/img/salida.png")));
 		btnSalir.setBackground(new Color(220, 220, 220));
 		btnSalir.setBounds(549, 14, 145, 35);
 		btnSalir.addActionListener(e -> {
@@ -336,7 +336,7 @@ public class FRMMantenimientoConsultorio extends JFrame {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setForeground(new Color(128, 128, 0));
 		btnBuscar.setBounds(489, 17, 100, 30);
-		btnBuscar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/IMG/busqueda.png")));
+		btnBuscar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/img/busqueda.png")));
 		btnBuscar.setBackground(SystemColor.info);
 		btnBuscar.addActionListener(e -> buscar());
 		panelBusqueda.add(btnBuscar);
@@ -377,7 +377,7 @@ public class FRMMantenimientoConsultorio extends JFrame {
 		});
 
 		JButton btnAgregar = new JButton("Agregar");
-		btnAgregar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/IMG/agregar.png")));
+		btnAgregar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/img/agregar.png")));
 		btnAgregar.setBackground(new Color(0, 128, 128));
 		btnAgregar.setBounds(10, 590, 100, 30);
 		btnAgregar.addActionListener(e -> {
@@ -390,7 +390,7 @@ public class FRMMantenimientoConsultorio extends JFrame {
 		contentPane.add(btnAgregar);
 
 		JButton btnModificar = new JButton("Modificar");
-		btnModificar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
+		btnModificar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/img/cuadrado-de-la-pluma.png")));
 		btnModificar.setBackground(new Color(0, 128, 128));
 		btnModificar.setBounds(120, 590, 100, 30);
 		btnModificar.addActionListener(e -> {
@@ -405,7 +405,7 @@ public class FRMMantenimientoConsultorio extends JFrame {
 		contentPane.add(btnModificar);
 
 		JButton btnGrabar = new JButton("Grabar");
-		btnGrabar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
+		btnGrabar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/img/flecha-de-circulo-de-disquete-a-la-derecha.png")));
 		btnGrabar.setBackground(new Color(0, 128, 128));
 		btnGrabar.setBounds(230, 590, 100, 30);
 		btnGrabar.addActionListener(e -> {
@@ -475,7 +475,7 @@ public class FRMMantenimientoConsultorio extends JFrame {
 		contentPane.add(btnGrabar);
 
 		JButton btnLimpiar = new JButton("Limpiar");
-		btnLimpiar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/IMG/escoba.png")));
+		btnLimpiar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/img/escoba.png")));
 		btnLimpiar.setBackground(new Color(128, 128, 0));
 		btnLimpiar.setBounds(459, 590, 100, 30);
 		btnLimpiar.addActionListener(e -> {
@@ -490,7 +490,7 @@ public class FRMMantenimientoConsultorio extends JFrame {
 		contentPane.add(btnLimpiar);
 
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/IMG/cruz-pequena.png")));
+		btnEliminar.setIcon(new ImageIcon(FRMMantenimientoConsultorio.class.getResource("/img/cruz-pequena.png")));
 		btnEliminar.setBackground(new Color(128, 0, 0));
 		btnEliminar.setBounds(569, 590, 100, 30);
 		btnEliminar.addActionListener(e -> {

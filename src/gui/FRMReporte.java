@@ -74,7 +74,7 @@ public class FRMReporte extends JFrame {
     }
 
     public FRMReporte() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(FRMReporte.class.getResource("/IMG/icon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(FRMReporte.class.getResource("/img/icon.png")));
         setTitle("Reporte");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 700, 799);
@@ -93,7 +93,7 @@ public class FRMReporte extends JFrame {
 
         btnSalir = new JButton("Salir / Volver");
         btnSalir.setForeground(new Color(128, 0, 0));
-        btnSalir.setIcon(new ImageIcon(FRMReporte.class.getResource("/IMG/salida.png")));
+        btnSalir.setIcon(new ImageIcon(FRMReporte.class.getResource("/img/salida.png")));
         btnSalir.setBackground(new Color(220, 220, 220));
         btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
         btnSalir.setBounds(508, 11, 162, 37);
@@ -222,7 +222,7 @@ public class FRMReporte extends JFrame {
         btnGenerar.setForeground(new Color(0, 255, 0));
         btnGenerar.setBounds(10, 297, 125, 30);
         panel.add(btnGenerar);
-        btnGenerar.setIcon(new ImageIcon(FRMReporte.class.getResource("/IMG/busqueda.png")));
+        btnGenerar.setIcon(new ImageIcon(FRMReporte.class.getResource("/img/busqueda.png")));
         btnGenerar.setBackground(new Color(0, 128, 128));
         btnGenerar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
 
@@ -230,7 +230,7 @@ public class FRMReporte extends JFrame {
         btnLimpiar.setForeground(new Color(240, 230, 140));
         btnLimpiar.setBounds(160, 297, 125, 30);
         panel.add(btnLimpiar);
-        btnLimpiar.setIcon(new ImageIcon(FRMReporte.class.getResource("/IMG/escoba.png")));
+        btnLimpiar.setIcon(new ImageIcon(FRMReporte.class.getResource("/img/escoba.png")));
         btnLimpiar.setBackground(new Color(128, 128, 0));
         btnLimpiar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
 
@@ -267,7 +267,7 @@ public class FRMReporte extends JFrame {
         scrollReporte.setViewportView(tblReporte);
 
         btnLimpiarResultado = new JButton("Limpiar");
-        btnLimpiarResultado.setIcon(new ImageIcon(FRMReporte.class.getResource("/IMG/escoba.png")));
+        btnLimpiarResultado.setIcon(new ImageIcon(FRMReporte.class.getResource("/img/escoba.png")));
         btnLimpiarResultado.setForeground(new Color(240, 230, 140));
         btnLimpiarResultado.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
         btnLimpiarResultado.setBackground(new Color(128, 128, 0));

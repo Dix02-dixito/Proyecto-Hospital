@@ -99,7 +99,7 @@ public class FRMMantenimientoCitas extends JFrame {
 
 		JButton btnSalir = new JButton("Salir / Volver");
 		btnSalir.setVerticalAlignment(SwingConstants.TOP);
-		btnSalir.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/IMG/salida.png")));
+		btnSalir.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/img/salida.png")));
 		btnSalir.setForeground(new Color(128, 0, 0));
 		btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
 		btnSalir.setBackground(new Color(220, 220, 220));
@@ -193,7 +193,7 @@ public class FRMMantenimientoCitas extends JFrame {
 		JLabel lblHorario_1 = new JLabel("Horario");
 		lblHorario_1.setForeground(new Color(0, 128, 128));
 		lblHorario_1.setFont(new Font("Segoe UI", Font.BOLD, 14));
-		lblHorario_1.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/IMG/calendar.png")));
+		lblHorario_1.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/img/calendar.png")));
 		lblHorario_1.setBounds(10, 192, 110, 20);
 		panelRegistrarCitas.add(lblHorario_1);
 
@@ -202,7 +202,7 @@ public class FRMMantenimientoCitas extends JFrame {
 		panelRegistrarCitas.add(separator2_1);
 
 		JLabel lblFecha_1 = new JLabel("Fecha");
-		lblFecha_1.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/IMG/calendario.png")));
+		lblFecha_1.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/img/calendario.png")));
 		lblFecha_1.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 		lblFecha_1.setBounds(12, 225, 81, 25);
 		panelRegistrarCitas.add(lblFecha_1);
@@ -215,7 +215,7 @@ public class FRMMantenimientoCitas extends JFrame {
 		panelRegistrarCitas.add(txtFecha);
 
 		JLabel lblHora_1 = new JLabel("Hora");
-		lblHora_1.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/IMG/reloj.png")));
+		lblHora_1.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/img/reloj.png")));
 		lblHora_1.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 		lblHora_1.setBounds(246, 225, 58, 25);
 		panelRegistrarCitas.add(lblHora_1);
@@ -259,7 +259,7 @@ public class FRMMantenimientoCitas extends JFrame {
 		panelBusqueda.add(txtBuscar);
 
 		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/IMG/busqueda.png")));
+		btnBuscar.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/img/busqueda.png")));
 		btnBuscar.setForeground(new Color(128, 128, 0));
 		btnBuscar.setBackground(SystemColor.info);
 		btnBuscar.setBounds(502, 17, 100, 30);
@@ -297,28 +297,28 @@ public class FRMMantenimientoCitas extends JFrame {
 		scrollPane.setViewportView(tblListaCitas);
 
 		JButton btnModificar = new JButton("Modificar");
-		btnModificar.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
+		btnModificar.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/img/cuadrado-de-la-pluma.png")));
 		btnModificar.setForeground(new Color(0, 0, 128));
 		btnModificar.setBackground(new Color(0, 128, 128));
 		btnModificar.setBounds(20, 735, 113, 30);
 		contentPane.add(btnModificar);
 
 		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
+		btnGuardar.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/img/flecha-de-circulo-de-disquete-a-la-derecha.png")));
 		btnGuardar.setForeground(new Color(0, 0, 128));
 		btnGuardar.setBackground(new Color(0, 128, 128));
 		btnGuardar.setBounds(143, 735, 100, 30);
 		contentPane.add(btnGuardar);
 
 		JButton btnLimpiar = new JButton("Limpiar");
-		btnLimpiar.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/IMG/escoba.png")));
+		btnLimpiar.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/img/escoba.png")));
 		btnLimpiar.setForeground(new Color(0, 0, 128));
 		btnLimpiar.setBackground(new Color(128, 128, 0));
 		btnLimpiar.setBounds(484, 735, 100, 30);
 		contentPane.add(btnLimpiar);
 
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/IMG/cruz-pequena.png")));
+		btnEliminar.setIcon(new ImageIcon(FRMMantenimientoCitas.class.getResource("/img/cruz-pequena.png")));
 		btnEliminar.setForeground(new Color(0, 0, 128));
 		btnEliminar.setBackground(new Color(128, 0, 0));
 		btnEliminar.setBounds(594, 735, 100, 30);

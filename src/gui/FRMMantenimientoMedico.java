@@ -137,7 +137,7 @@ public class FRMMantenimientoMedico extends JFrame {
 	public FRMMantenimientoMedico() {
 
 		setTitle("Mantenimiento Medicos");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(FRMMantenimientoMedico.class.getResource("/IMG/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FRMMantenimientoMedico.class.getResource("/img/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 693, 723);
 
@@ -156,7 +156,7 @@ public class FRMMantenimientoMedico extends JFrame {
 		JButton btnSalir = new JButton("Salir / Volver");
 		btnSalir.setForeground(new Color(128, 0, 0));
 		btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
-		btnSalir.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/IMG/salida.png")));
+		btnSalir.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/img/salida.png")));
 		btnSalir.setBackground(new Color(220, 220, 220));
 		btnSalir.setBounds(500, 21, 167, 35);
 		btnSalir.addActionListener(e -> {
@@ -287,7 +287,7 @@ public class FRMMantenimientoMedico extends JFrame {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setForeground(new Color(128, 128, 0));
 		btnBuscar.setBounds(434, 18, 100, 30);
-		btnBuscar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/IMG/busqueda.png")));
+		btnBuscar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/img/busqueda.png")));
 		btnBuscar.setBackground(new Color(255, 255, 224));
 		btnBuscar.addActionListener(e -> {
 
@@ -370,7 +370,7 @@ public class FRMMantenimientoMedico extends JFrame {
 		contentPane.add(btnAgregar);
 
 		JButton btnModificar = new JButton("Modificar");
-		btnModificar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/IMG/cuadrado-de-la-pluma.png")));
+		btnModificar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/img/cuadrado-de-la-pluma.png")));
 		btnModificar.setBackground(new Color(0, 128, 128));
 		btnModificar.setBounds(130, 645, 109, 30);
 		btnModificar.addActionListener(e -> {
@@ -389,7 +389,7 @@ public class FRMMantenimientoMedico extends JFrame {
 		contentPane.add(btnModificar);
 
 		JButton btnGrabar = new JButton("Grabar");
-		btnGrabar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
+		btnGrabar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/img/flecha-de-circulo-de-disquete-a-la-derecha.png")));
 		btnGrabar.setBackground(new Color(0, 128, 128));
 		btnGrabar.setBounds(249, 645, 100, 30);
 		btnGrabar.addActionListener(e -> {
@@ -437,7 +437,7 @@ public class FRMMantenimientoMedico extends JFrame {
 		contentPane.add(btnGrabar);
 
 		JButton btnLimpiar = new JButton("Limpiar");
-		btnLimpiar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/IMG/escoba.png")));
+		btnLimpiar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/img/escoba.png")));
 		btnLimpiar.setBackground(new Color(128, 128, 0));
 		btnLimpiar.setBounds(425, 645, 100, 30);
 		btnLimpiar.addActionListener(e -> {
@@ -452,7 +452,7 @@ public class FRMMantenimientoMedico extends JFrame {
 		contentPane.add(btnLimpiar);
 
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/IMG/cruz-pequena.png")));
+		btnEliminar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/img/cruz-pequena.png")));
 		btnEliminar.setBackground(new Color(128, 0, 0));
 		btnEliminar.setBounds(535, 645, 100, 30);
 		btnEliminar.addActionListener(e -> {

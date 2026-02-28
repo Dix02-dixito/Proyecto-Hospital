@@ -50,7 +50,7 @@ public class FRMAyuda extends JFrame {
 	 */
 	public FRMAyuda() {
 		setTitle("Ayuda");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(FRMAyuda.class.getResource("/IMG/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FRMAyuda.class.getResource("/img/icon.png")));
 		setBackground(new Color(128, 128, 128));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 696, 422);
@@ -65,7 +65,7 @@ public class FRMAyuda extends JFrame {
 		lblTitulo.setBackground(SystemColor.inactiveCaptionText);
 		lblTitulo.setForeground(new Color(0, 0, 0));
 		lblTitulo.setFont(new Font("Segoe UI Symbol", Font.BOLD, 15));
-		lblTitulo.setIcon(new ImageIcon(FRMAyuda.class.getResource("/IMG/grupo-de-personas.png")));
+		lblTitulo.setIcon(new ImageIcon(FRMAyuda.class.getResource("/img/grupo-de-personas.png")));
 		lblTitulo.setBounds(218, 0, 216, 47);
 		bg.add(lblTitulo);
 		
@@ -115,7 +115,7 @@ public class FRMAyuda extends JFrame {
 		btnSalir.setBounds(520, 10, 150, 30);
 		bg.add(btnSalir);
 		btnSalir.setVerticalAlignment(SwingConstants.TOP);
-		btnSalir.setIcon(new ImageIcon(FRMAyuda.class.getResource("/IMG/salida.png")));
+		btnSalir.setIcon(new ImageIcon(FRMAyuda.class.getResource("/img/salida.png")));
 		btnSalir.setForeground(new Color(128, 0, 0));
 		btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
 		btnSalir.setBackground(new Color(0, 128, 0));

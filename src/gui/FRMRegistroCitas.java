@@ -72,7 +72,7 @@ public class FRMRegistroCitas extends JFrame {
 
     public FRMRegistroCitas() {
         setTitle("Registro de Citas");
-        setIconImage(Toolkit.getDefaultToolkit().getImage(FRMRegistroCitas.class.getResource("/IMG/icon.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(FRMRegistroCitas.class.getResource("/img/icon.png")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 762, 700);
 
@@ -85,7 +85,7 @@ public class FRMRegistroCitas extends JFrame {
         btnSalir.setVerticalAlignment(SwingConstants.TOP);
         btnSalir.setBounds(582, 23, 150, 30);
         btnSalir.setForeground(new Color(128, 0, 0));
-        btnSalir.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/salida.png")));
+        btnSalir.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/img/salida.png")));
         btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
         btnSalir.setBackground(new Color(192, 192, 192));
         btnSalir.addActionListener(new ActionListener() {
@@ -182,7 +182,7 @@ public class FRMRegistroCitas extends JFrame {
         lblHorario.setForeground(new Color(0, 128, 128));
         lblHorario.setFont(new Font("Segoe UI", Font.BOLD, 14));
         lblHorario.setBounds(10, 192, 80, 20);
-        lblHorario.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/calendar.png")));
+        lblHorario.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/img/calendar.png")));
         panelRegistrarCitas.add(lblHorario);
 
         JSeparator separator2 = new JSeparator();
@@ -194,7 +194,7 @@ public class FRMRegistroCitas extends JFrame {
         JLabel lblFecha = new JLabel("Fecha YYYY-MM-DD");
         lblFecha.setFont(new Font("Segoe UI", Font.PLAIN, 11));
         lblFecha.setBounds(12, 225, 120, 25);
-        lblFecha.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/calendario.png")));
+        lblFecha.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/img/calendario.png")));
         panelRegistrarCitas.add(lblFecha);
 
         txtfecha = new JTextField();
@@ -206,7 +206,7 @@ public class FRMRegistroCitas extends JFrame {
         JLabel lblHora = new JLabel("Hora HH:MM:SS");
         lblHora.setFont(new Font("Segoe UI", Font.PLAIN, 11));
         lblHora.setBounds(246, 225, 112, 25);
-        lblHora.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/reloj.png")));
+        lblHora.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/img/reloj.png")));
         panelRegistrarCitas.add(lblHora);
 
         txtHora = new JTextField();
@@ -252,21 +252,21 @@ public class FRMRegistroCitas extends JFrame {
         // ===================== BOTONES =====================
         btnNuevo = new JButton("Nuevo");
         btnNuevo.setBounds(20, 615, 125, 25);
-        btnNuevo.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/agregar.png")));
+        btnNuevo.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/img/agregar.png")));
         btnNuevo.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
         btnNuevo.setBackground(new Color(0, 128, 128));
         contentPane.add(btnNuevo);
 
         btnGuardar = new JButton("Guardar");
         btnGuardar.setBounds(155, 615, 125, 25);
-        btnGuardar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/flecha-de-circulo-de-disquete-a-la-derecha.png")));
+        btnGuardar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/img/flecha-de-circulo-de-disquete-a-la-derecha.png")));
         btnGuardar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
         btnGuardar.setBackground(new Color(0, 128, 128));
         contentPane.add(btnGuardar);
 
         btnLimpiar = new JButton("Limpiar");
         btnLimpiar.setBounds(582, 615, 125, 25);
-        btnLimpiar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/IMG/escoba.png")));
+        btnLimpiar.setIcon(new ImageIcon(FRMRegistroCitas.class.getResource("/img/escoba.png")));
         btnLimpiar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 12));
         btnLimpiar.setBackground(new Color(128, 128, 0));
         contentPane.add(btnLimpiar);
