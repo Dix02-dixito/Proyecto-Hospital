@@ -357,7 +357,7 @@ public class FRMMantenimientoMedico extends JFrame {
 		});
 
 		JButton btnAgregar = new JButton("Nuevo");
-		btnAgregar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/IMG/agregar.png")));
+		btnAgregar.setIcon(new ImageIcon(FRMMantenimientoMedico.class.getResource("/img/agregar.png")));
 		btnAgregar.setBackground(new Color(0, 128, 128));
 		btnAgregar.setBounds(20, 645, 100, 30);
 		btnAgregar.addActionListener(e -> {
