@@ -1,289 +1,275 @@
 package controlador;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
 import entidad.Paciente;
 import conexion.ConexionBD;
 
 public class PacienteDAO {
-	
-//METODO PARA LISTAR PACIENTE
+
+	// ESTE METODO SIRVE PARA LISTAR LOS PACIENTES ACTIVOS (PARA TABLA O COMBO)
 	public List<Paciente> listarActivos() {
 
-	    List<Paciente> lista = new ArrayList<>();
-	    String sql = "SELECT * FROM paciente WHERE estado_paciente = 1";
+		List<Paciente> lista = new ArrayList<>();
+		String sql = "SELECT * FROM paciente WHERE estado_paciente = 1";
 
-	    try (Connection con = ConexionBD.conectar();
-	         PreparedStatement ps = con.prepareStatement(sql);
-	         ResultSet rs = ps.executeQuery()) {
+		try (Connection con = ConexionBD.conectar();
+			 PreparedStatement ps = con.prepareStatement(sql);
+			 ResultSet rs = ps.executeQuery()) {
 
-	        while (rs.next()) {
-	            Paciente p = new Paciente();
+			while (rs.next()) {
+				Paciente p = new Paciente();
 
-	            p.setCodPaciente(rs.getInt("codPaciente"));
-	            p.setNombres(rs.getString("nombres_paciente"));
-	            p.setApellidos(rs.getString("apellidos_paciente"));
-	            p.setEdad(rs.getInt("edad_paciente"));
-	            p.setDni(rs.getString("dni_paciente"));
-	            p.setEstado(rs.getInt("estado_paciente"));
-	            p.setCelular(rs.getString("celular_paciente"));
-	            p.setCorreo(rs.getString("correo_paciente"));
+				p.setCodPaciente(rs.getInt("codPaciente"));
+				p.setNombres(rs.getString("nombres_paciente"));
+				p.setApellidos(rs.getString("apellidos_paciente"));
+				p.setEdad(rs.getInt("edad_paciente"));
+				p.setDni(rs.getString("dni_paciente"));
+				p.setEstado(rs.getInt("estado_paciente"));
+				p.setCelular(rs.getString("celular_paciente"));
+				p.setCorreo(rs.getString("correo_paciente"));
 
-	            lista.add(p);
-	        }
+				lista.add(p);
+			}
 
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	    return lista;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lista;
 	}
-	
-	
-    ////METODO PARA AGREGAR un nuevo PACIENTE
-    public boolean insertarPaciente(Paciente p) {
 
-        String sql = "INSERT INTO paciente " +
-                "(nombres_paciente, apellidos_paciente, edad_paciente, dni_paciente, correo_paciente, celular_paciente, estado_paciente) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+	// ESTE METODO SIRVE PARA REGISTRAR UN NUEVO PACIENTE
+	public boolean insertarPaciente(Paciente p) {
 
-        try (Connection con = ConexionBD.conectar();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+		String sql = "INSERT INTO paciente "
+				+ "(nombres_paciente, apellidos_paciente, edad_paciente, dni_paciente, correo_paciente, celular_paciente, estado_paciente) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            ps.setString(1, p.getNombres());
-            ps.setString(2, p.getApellidos());
-            ps.setInt(3, p.getEdad());
-            ps.setString(4, p.getDni());
-            ps.setString(5, p.getCorreo());
-            ps.setString(6, p.getCelular());
-            ps.setInt(7, p.getEstado()); 
+		try (Connection con = ConexionBD.conectar();
+			 PreparedStatement ps = con.prepareStatement(sql)) {
 
-            return ps.executeUpdate() > 0;
+			ps.setString(1, p.getNombres());
+			ps.setString(2, p.getApellidos());
+			ps.setInt(3, p.getEdad());
+			ps.setString(4, p.getDni());
+			ps.setString(5, p.getCorreo());
+			ps.setString(6, p.getCelular());
+			ps.setInt(7, p.getEstado());
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-    
-    
-    //METODO PARA ACTUALIZAR PACIENTE EN EL BOTON GUARDAR
-    public boolean actualizarPaciente(Paciente p) {
+			return ps.executeUpdate() > 0;
 
-    	String sql = "UPDATE paciente SET " +
-                "nombres_paciente=?, apellidos_paciente=?, dni_paciente=?, edad_paciente=?, " +
-                "celular_paciente=?, correo_paciente=? " +
-                "WHERE codPaciente=?";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
-        try (Connection con = ConexionBD.conectar();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+	// ESTE METODO SIRVE PARA ACTUALIZAR UN PACIENTE (BOTON GUARDAR)
+	public boolean actualizarPaciente(Paciente p) {
 
-            ps.setString(1, p.getNombres());
-            ps.setString(2, p.getApellidos());
-            ps.setString(3, p.getDni());
-            ps.setInt(4, p.getEdad());
-            ps.setString(5, p.getCelular());
-            ps.setString(6, p.getCorreo());
-            ps.setInt(7, p.getCodPaciente());
+		String sql = "UPDATE paciente SET "
+				+ "nombres_paciente=?, apellidos_paciente=?, dni_paciente=?, edad_paciente=?, "
+				+ "celular_paciente=?, correo_paciente=? "
+				+ "WHERE codPaciente=?";
 
-            return ps.executeUpdate() > 0;
+		try (Connection con = ConexionBD.conectar();
+			 PreparedStatement ps = con.prepareStatement(sql)) {
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            
-        }
-        return false;
-    }
-    //METODO PARA BUSCAR POR DNI EN EL BOTON BUSCAR
-    public Paciente buscarPorDni(String dni) {
-        Paciente p = null;
+			ps.setString(1, p.getNombres());
+			ps.setString(2, p.getApellidos());
+			ps.setString(3, p.getDni());
+			ps.setInt(4, p.getEdad());
+			ps.setString(5, p.getCelular());
+			ps.setString(6, p.getCorreo());
+			ps.setInt(7, p.getCodPaciente());
 
-        String sql = "SELECT * FROM paciente WHERE dni_paciente = ? AND estado_paciente = 1";
+			return ps.executeUpdate() > 0;
 
-        try (Connection con = ConexionBD.conectar();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
-            ps.setString(1, dni);
-            ResultSet rs = ps.executeQuery();
+	// ESTE METODO SIRVE PARA BUSCAR UN PACIENTE POR DNI (BOTON BUSCAR)
+	public Paciente buscarPorDni(String dni) {
 
-            if (rs.next()) {
-                p = new Paciente();
+		Paciente p = null;
+		String sql = "SELECT * FROM paciente WHERE dni_paciente = ? AND estado_paciente = 1";
 
-                p.setCodPaciente(rs.getInt("codPaciente"));
-                p.setNombres(rs.getString("nombres_paciente"));
-                p.setApellidos(rs.getString("apellidos_paciente"));
-                p.setEdad(rs.getInt("edad_paciente"));
-                p.setDni(rs.getString("dni_paciente"));
-                p.setEstado(rs.getInt("estado_paciente"));
-                p.setCelular(rs.getString("celular_paciente"));
-                p.setCorreo(rs.getString("correo_paciente"));
-            }
+		try (Connection con = ConexionBD.conectar();
+			 PreparedStatement ps = con.prepareStatement(sql)) {
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+			ps.setString(1, dni);
+			ResultSet rs = ps.executeQuery();
 
-        return p;
-        
-    }
-    //METODO PARA BUSCAR POR APELLIDO EN EL BOTON BUSCAR
-    public ArrayList<Paciente> buscarPorApellido(String apellido) {
+			if (rs.next()) {
+				p = new Paciente();
 
-        ArrayList<Paciente> lista = new ArrayList<>();
+				p.setCodPaciente(rs.getInt("codPaciente"));
+				p.setNombres(rs.getString("nombres_paciente"));
+				p.setApellidos(rs.getString("apellidos_paciente"));
+				p.setEdad(rs.getInt("edad_paciente"));
+				p.setDni(rs.getString("dni_paciente"));
+				p.setEstado(rs.getInt("estado_paciente"));
+				p.setCelular(rs.getString("celular_paciente"));
+				p.setCorreo(rs.getString("correo_paciente"));
+			}
 
-        String sql = "SELECT * FROM paciente WHERE apellidos_paciente LIKE ? AND estado_paciente = 1";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-        try (Connection con = ConexionBD.conectar();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+		return p;
+	}
 
-            ps.setString(1, "%" + apellido + "%");
-            ResultSet rs = ps.executeQuery();
+	// ESTE METODO SIRVE PARA BUSCAR PACIENTES POR APELLIDO (BOTON BUSCAR)
+	public ArrayList<Paciente> buscarPorApellido(String apellido) {
 
-            while (rs.next()) {
-                Paciente p = new Paciente();
+		ArrayList<Paciente> lista = new ArrayList<>();
+		String sql = "SELECT * FROM paciente WHERE apellidos_paciente LIKE ? AND estado_paciente = 1";
 
-                p.setCodPaciente(rs.getInt("codPaciente"));
-                p.setNombres(rs.getString("nombres_paciente"));
-                p.setApellidos(rs.getString("apellidos_paciente"));
-                p.setEdad(rs.getInt("edad_paciente"));
-                p.setDni(rs.getString("dni_paciente"));
-                p.setEstado(rs.getInt("estado_paciente"));
-                p.setCelular(rs.getString("celular_paciente"));
-                p.setCorreo(rs.getString("correo_paciente"));
+		try (Connection con = ConexionBD.conectar();
+			 PreparedStatement ps = con.prepareStatement(sql)) {
 
-                lista.add(p);
-            }
+			ps.setString(1, "%" + apellido + "%");
+			ResultSet rs = ps.executeQuery();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+			while (rs.next()) {
+				Paciente p = new Paciente();
 
-        return lista;
-    }
-    //METODO QUE BUSCA POR CODIGO EN LA LISTA PARA RELLENAR LOS CAMPOS EN EL BOTON MODIFICAR
-    public Paciente buscarPorCodigo(int codigo) {
-    	
-    	String sql = "SELECT * FROM paciente WHERE codPaciente = ?";
-    	Paciente p = null;
-    	
-    	try (Connection con = ConexionBD.conectar();
-    		 PreparedStatement ps = con.prepareStatement(sql)){
-    		
-    		ps.setInt(1, codigo);
-    		ResultSet rs = ps.executeQuery();
-    		if (rs.next()) {
-                 p = new Paciente();
+				p.setCodPaciente(rs.getInt("codPaciente"));
+				p.setNombres(rs.getString("nombres_paciente"));
+				p.setApellidos(rs.getString("apellidos_paciente"));
+				p.setEdad(rs.getInt("edad_paciente"));
+				p.setDni(rs.getString("dni_paciente"));
+				p.setEstado(rs.getInt("estado_paciente"));
+				p.setCelular(rs.getString("celular_paciente"));
+				p.setCorreo(rs.getString("correo_paciente"));
 
-                p.setCodPaciente(rs.getInt("codPaciente"));
-                p.setNombres(rs.getString("nombres_paciente"));
-                p.setApellidos(rs.getString("apellidos_paciente"));
-                p.setEdad(rs.getInt("edad_paciente"));
-                p.setDni(rs.getString("dni_paciente"));
-                p.setEstado(rs.getInt("estado_paciente"));
-                p.setCelular(rs.getString("celular_paciente"));
-                p.setCorreo(rs.getString("correo_paciente"));
+				lista.add(p);
+			}
 
-                
-            }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+		return lista;
+	}
 
-        return p;
-    		
-    		
-    	}
-    //METODO PARA EL BOTON ELIMINAR
-    public boolean eliminarPaciente(int codigo) {
+	// ESTE METODO SIRVE PARA BUSCAR UN PACIENTE POR CODIGO (PARA MODIFICAR)
+	public Paciente buscarPorCodigo(int codigo) {
 
-        String sql = "UPDATE paciente SET estado_paciente = 0 WHERE codPaciente = ?";
+		String sql = "SELECT * FROM paciente WHERE codPaciente = ?";
+		Paciente p = null;
 
-        try (Connection con = ConexionBD.conectar();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+		try (Connection con = ConexionBD.conectar();
+			 PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setInt(1, codigo);
-            return ps.executeUpdate() > 0;
+			ps.setInt(1, codigo);
+			ResultSet rs = ps.executeQuery();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    
-    //METODO PARA VALIDAR QUE NO HAYA DNI DUPLICADO EN NUEVO
-    
-    public boolean existeDni(String dni, int codigoActual) {
+			if (rs.next()) {
+				p = new Paciente();
 
-        String sql = "SELECT COUNT(*) FROM paciente WHERE dni_paciente = ? AND codPaciente <> ?";
+				p.setCodPaciente(rs.getInt("codPaciente"));
+				p.setNombres(rs.getString("nombres_paciente"));
+				p.setApellidos(rs.getString("apellidos_paciente"));
+				p.setEdad(rs.getInt("edad_paciente"));
+				p.setDni(rs.getString("dni_paciente"));
+				p.setEstado(rs.getInt("estado_paciente"));
+				p.setCelular(rs.getString("celular_paciente"));
+				p.setCorreo(rs.getString("correo_paciente"));
+			}
 
-        try (Connection con = ConexionBD.conectar();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-            ps.setString(1, dni);
-            ps.setInt(2, codigoActual);
+		return p;
+	}
 
-            ResultSet rs = ps.executeQuery();
+	// ESTE METODO SIRVE PARA ELIMINAR (INACTIVAR) UN PACIENTE
+	public boolean eliminarPaciente(int codigo) {
 
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
-            }
+		String sql = "UPDATE paciente SET estado_paciente = 0 WHERE codPaciente = ?";
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+		try (Connection con = ConexionBD.conectar();
+			 PreparedStatement ps = con.prepareStatement(sql)) {
 
-        return false;
-    }
-    
-  //METODO PARA VALIDAR QUE NO HAYA DNI DUPLICADO EN ACTUALIZAR
-    
-    public boolean existeDniNuevo(String dni) {
+			ps.setInt(1, codigo);
+			return ps.executeUpdate() > 0;
 
-        String sql = "SELECT COUNT(*) FROM paciente WHERE dni_paciente = ?";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-        try (Connection con = ConexionBD.conectar();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+	// ESTE METODO SIRVE PARA VALIDAR DNI REPETIDO AL ACTUALIZAR (EXCLUYE EL MISMO CODIGO)
+	public boolean existeDni(String dni, int codigoActual) {
 
-            ps.setString(1, dni);
-            ResultSet rs = ps.executeQuery();
+		String sql = "SELECT COUNT(*) FROM paciente WHERE dni_paciente = ? AND codPaciente <> ?";
 
-            if (rs.next()) {
-                return rs.getInt(1) > 0; // true si ya existe
-            }
+		try (Connection con = ConexionBD.conectar();
+			 PreparedStatement ps = con.prepareStatement(sql)) {
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+			ps.setString(1, dni);
+			ps.setInt(2, codigoActual);
 
-        return false;
-    }
-    //OBTENER COD POR NOMBRE PARA EL COMBOBOX
-    public Integer obtenerCodPorNombreCompleto(String nombreCompleto) {
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) return rs.getInt(1) > 0;
 
-        String sql = "SELECT codPaciente FROM paciente " +
-                     "WHERE (nombres_paciente + ' ' + apellidos_paciente) = ? " +
-                     "AND estado_paciente = 1";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-        try (Connection con = ConexionBD.conectar();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+		return false;
+	}
 
-            ps.setString(1, nombreCompleto);
+	// ESTE METODO SIRVE PARA VALIDAR DNI REPETIDO CUANDO ES NUEVO REGISTRO
+	public boolean existeDniNuevo(String dni) {
 
-            ResultSet rs = ps.executeQuery();
+		String sql = "SELECT COUNT(*) FROM paciente WHERE dni_paciente = ?";
 
-            if (rs.next()) {
-                return rs.getInt("codPaciente");
-            }
+		try (Connection con = ConexionBD.conectar();
+			 PreparedStatement ps = con.prepareStatement(sql)) {
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+			ps.setString(1, dni);
+			ResultSet rs = ps.executeQuery();
 
-        return null;
-    }
+			if (rs.next()) return rs.getInt(1) > 0;
 
-    
-    
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
+		return false;
+	}
+
+	// ESTE METODO SIRVE PARA OBTENER EL CODIGO DEL PACIENTE SEGUN SU NOMBRE COMPLETO (COMBOBOX)
+	public Integer obtenerCodPorNombreCompleto(String nombreCompleto) {
+
+		String sql = "SELECT codPaciente FROM paciente "
+				+ "WHERE (nombres_paciente + ' ' + apellidos_paciente) = ? "
+				+ "AND estado_paciente = 1";
+
+		try (Connection con = ConexionBD.conectar();
+			 PreparedStatement ps = con.prepareStatement(sql)) {
+
+			ps.setString(1, nombreCompleto);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) return rs.getInt("codPaciente");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 }

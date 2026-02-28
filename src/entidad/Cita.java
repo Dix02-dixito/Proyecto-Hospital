@@ -1,19 +1,26 @@
 package entidad;
 
 public class Cita {
-	//class private
+
+	// Atributos
 	private int numCita;
 	private int codPaciente;
 	private int codMedico;
 	private int codConsultorio;
-	private String fecha;
-	private String hora;
-	private int estado;
+	private String fecha;     // formato: yyyy-MM-dd
+	private String hora;      // formato: HH:mm:ss
+	private int estado;       // 0 = Cancelada, 1 = Pendiente, 2 = Atendida
 	private String motivo;
-	
-	//Constructor
-	public Cita(int numCita, int codPaciente, int codMedico, int codConsultorio, String fecha, String hora, int estado,
-			String motivo) {
+
+	// Constructor vacío (MUY IMPORTANTE)
+	public Cita() {
+	}
+
+	// Constructor completo
+	public Cita(int numCita, int codPaciente, int codMedico,
+	            int codConsultorio, String fecha, String hora,
+	            int estado, String motivo) {
+
 		this.numCita = numCita;
 		this.codPaciente = codPaciente;
 		this.codMedico = codMedico;
@@ -24,7 +31,8 @@ public class Cita {
 		this.motivo = motivo;
 	}
 
-	//metodos get y set
+	// Getters y Setters
+
 	public int getNumCita() {
 		return numCita;
 	}

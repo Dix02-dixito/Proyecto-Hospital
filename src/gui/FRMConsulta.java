@@ -267,10 +267,9 @@ public class FRMConsulta extends JFrame {
         btnLimpiarListaCitas.addActionListener(e -> limpiarTabla());
 
         btnSalir.addActionListener(e -> {
-            // Si tienes un FRMPrincipal, vuelve:
-            // FRMPrincipal p = new FRMPrincipal();
-            // p.setVisible(true);
-            dispose();
+        	FRMPrincipal principal = new FRMPrincipal();
+        	principal.setVisible(true);
+               dispose(); 
         });
     }
 

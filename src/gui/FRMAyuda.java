@@ -20,6 +20,9 @@ import javax.swing.JTree;
 import javax.swing.JEditorPane;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FRMAyuda extends JFrame {
 
@@ -100,6 +103,22 @@ public class FRMAyuda extends JFrame {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 48, 124, 2);
 		bgsecundario.add(separator);
+		
+		JButton btnSalir = new JButton("Salir / Volver");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FRMPrincipal principal = new FRMPrincipal();
+				principal.setVisible(true);
+				dispose();
+			}
+		});
+		btnSalir.setBounds(520, 10, 150, 30);
+		bg.add(btnSalir);
+		btnSalir.setVerticalAlignment(SwingConstants.TOP);
+		btnSalir.setIcon(new ImageIcon(FRMAyuda.class.getResource("/IMG/salida.png")));
+		btnSalir.setForeground(new Color(128, 0, 0));
+		btnSalir.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
+		btnSalir.setBackground(new Color(0, 128, 0));
 
 	}
 }

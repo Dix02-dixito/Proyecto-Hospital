@@ -7,6 +7,14 @@ import java.awt.event.*;
 public class FRMPrincipal extends JFrame {
 
     private JPanel contentpane;
+    
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new FRMPrincipal().setVisible(true);
+            }
+        });
+    }
 
     public FRMPrincipal() {
     	setIconImage(Toolkit.getDefaultToolkit().getImage(FRMPrincipal.class.getResource("/img/icon.png")));
@@ -31,6 +39,7 @@ public class FRMPrincipal extends JFrame {
 
         // boton para registrar citas
         JButton btnregistrocitas = new JButton("registrar citas");
+        btnregistrocitas.setBackground(new Color(119, 136, 153));
         btnregistrocitas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 FRMRegistroCitas registrocitas = new FRMRegistroCitas();
@@ -44,6 +53,7 @@ public class FRMPrincipal extends JFrame {
 
         // boton para mantenimiento de paciente
         JButton btnpaciente = new JButton("mantenimiento paciente");
+        btnpaciente.setBackground(new Color(32, 178, 170));
         btnpaciente.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		 FRMMantenimientoPaciente mantenimientopaciente = new FRMMantenimientoPaciente();
@@ -57,6 +67,7 @@ public class FRMPrincipal extends JFrame {
 
         // boton para mantenimiento de medico
         JButton btnmedico = new JButton("mantenimiento medico");
+        btnmedico.setBackground(new Color(32, 178, 170));
         btnmedico.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		FRMMantenimientoMedico mantenimientomedico = new FRMMantenimientoMedico();
@@ -70,6 +81,7 @@ public class FRMPrincipal extends JFrame {
 
         // boton para mantenimiento de consultorio
         JButton btnconsultorio = new JButton("mantenimiento consultorio");
+        btnconsultorio.setBackground(new Color(32, 178, 170));
         btnconsultorio.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		FRMMantenimientoConsultorio mantenimientoconsultorio = new FRMMantenimientoConsultorio();
@@ -83,6 +95,7 @@ public class FRMPrincipal extends JFrame {
 
         // boton para consulta
         JButton btnconsulta = new JButton("consulta");
+        btnconsulta.setBackground(new Color(30, 144, 255));
         btnconsulta.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		FRMConsulta consulta = new FRMConsulta();
@@ -91,11 +104,12 @@ public class FRMPrincipal extends JFrame {
         	}
         });
         btnconsulta.setIcon(new ImageIcon(FRMPrincipal.class.getResource("/img/eye.png")));
-        btnconsulta.setBounds(10, 289, 200, 40);
+        btnconsulta.setBounds(10, 391, 200, 40);
         panelmenu.add(btnconsulta);
 
         // boton para reporte
         JButton btnreporte = new JButton("reporte");
+        btnreporte.setBackground(new Color(128, 128, 0));
         btnreporte.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		FRMReporte reporte = new FRMReporte();
@@ -109,6 +123,7 @@ public class FRMPrincipal extends JFrame {
 
         // boton para ayuda
         JButton btnayuda = new JButton("ayuda");
+        btnayuda.setBackground(new Color(85, 107, 47));
         btnayuda.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		FRMAyuda ayuda = new FRMAyuda();
@@ -118,7 +133,7 @@ public class FRMPrincipal extends JFrame {
         	}
         });
         btnayuda.setIcon(new ImageIcon(FRMPrincipal.class.getResource("/img/headset.png")));
-        btnayuda.setBounds(10, 391, 200, 40);
+        btnayuda.setBounds(10, 442, 200, 40);
         panelmenu.add(btnayuda);
         
 
@@ -136,17 +151,20 @@ public class FRMPrincipal extends JFrame {
         panelmenu.add(separator);
         
                 // boton para cerrar sesion
-                JButton btnsalir = new JButton("cerrar sesion");
-                btnsalir.setBounds(10, 441, 200, 40);
-                panelmenu.add(btnsalir);
-                btnsalir.setBackground(new Color(0, 128, 128)); // teal
-                btnsalir.setForeground(new Color(0, 0, 0)); // negro texto
-                btnsalir.addActionListener(new ActionListener() {
+                JButton btnMantenimientoCitas = new JButton("Mantenimiento Cita");
+                btnMantenimientoCitas.setBounds(10, 289, 200, 40);
+                panelmenu.add(btnMantenimientoCitas);
+                btnMantenimientoCitas.setBackground(new Color(32, 178, 170)); // teal
+                btnMantenimientoCitas.setForeground(new Color(0, 0, 0)); // negro texto
+                btnMantenimientoCitas.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         // accion para cerrar sesion aqui
+                    	FRMMantenimientoCitas mantenimientocitas = new FRMMantenimientoCitas();
+                    	mantenimientocitas.setVisible(true);
+                           dispose(); 
                     }
                 });
-                btnsalir.setIcon(new ImageIcon(FRMPrincipal.class.getResource("/img/salida.png")));
+                btnMantenimientoCitas.setIcon(new ImageIcon(FRMPrincipal.class.getResource("/img/settings (2).png")));
 
         // header
         JPanel panelheader = new JPanel();

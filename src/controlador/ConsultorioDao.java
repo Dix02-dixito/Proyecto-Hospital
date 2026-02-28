@@ -8,8 +8,10 @@ import conexion.ConexionBD;
 import entidad.Consultorio;
 
 public class ConsultorioDao {
-	// 1) LISTAR ACTIVOS (para combobox)
+
+    // ESTE METODO SIRVE PARA LISTAR LOS CONSULTORIOS ACTIVOS (PARA EL COMBOBOX)
     public List<Consultorio> listarActivos() {
+
         List<Consultorio> lista = new ArrayList<>();
         String sql = "SELECT * FROM consultorio WHERE estado_consultorio = 1";
 
@@ -32,10 +34,11 @@ public class ConsultorioDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return lista;
     }
 
-    // 2) OBTENER ID POR NOMBRE (si escriben)
+    // ESTE METODO SIRVE PARA OBTENER EL CODIGO DEL CONSULTORIO SEGUN SU NOMBRE
     public Integer obtenerCodPorNombre(String nombre) {
 
         String sql = "SELECT codConsultorio FROM consultorio " +
@@ -59,6 +62,4 @@ public class ConsultorioDao {
 
         return null;
     }
-	
-
 }

@@ -11,8 +11,7 @@ import entidad.Cita;
 
 public class CitaDao {
 
-    // ===================== ESTADO A TEXTO =====================
-    // 0 = cancelada, 1 = pendiente, 2 = atendida
+    // ESTE METODO SIRVE PARA CONVERTIR EL ESTADO NUMERICO A TEXTO
     private String estadoTexto(int estado) {
         if (estado == 0) return "Cancelada";
         if (estado == 1) return "Pendiente";
@@ -20,12 +19,12 @@ public class CitaDao {
         return "Desconocido";
     }
 
-    // ===================== CANCELAR CITAS PENDIENTES =====================
+    // ESTE METODO SIRVE PARA CANCELAR TODAS LAS CITAS PENDIENTES DE UN PACIENTE
     public boolean cancelarCitasPendientesPaciente(int codPaciente) {
 
-        String sql = "UPDATE cita SET estado_cita = 0 " + // 0 = cancelada
+        String sql = "UPDATE cita SET estado_cita = 0 " +
                      "WHERE codPaciente = ? " +
-                     "AND estado_cita = 1"; // 1 = pendiente
+                     "AND estado_cita = 1";
 
         try (Connection con = ConexionBD.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -40,13 +39,12 @@ public class CitaDao {
         return false;
     }
 
-    // ===================== COMPROBAR SI TIENE CITAS FUTURAS =====================
+    // ESTE METODO SIRVE PARA VERIFICAR SI UN PACIENTE TIENE CITAS FUTURAS PENDIENTES
     public boolean pacienteTieneCitasFuturas(int codPaciente) {
 
-        // OJO: te faltaban espacios en el SQL original, por eso es mejor así:
         String sql = "SELECT COUNT(*) FROM cita " +
                      "WHERE codPaciente = ? " +
-                     "AND estado_cita = 1 " + // pendiente
+                     "AND estado_cita = 1 " +
                      "AND fecha_cita >= CAST(GETDATE() AS DATE)";
 
         try (Connection con = ConexionBD.conectar();
@@ -65,12 +63,12 @@ public class CitaDao {
         return false;
     }
 
-    // ===================== INSERTAR CITA Y RETORNAR NUMCITA =====================
+    // ESTE METODO SIRVE PARA REGISTRAR UNA CITA Y DEVOLVER EL NUMERO GENERADO
     public Integer insertarYRetornarNumCita(Cita c) {
 
         String sql = "INSERT INTO cita (codPaciente, codMedico, codConsultorio, motivo_cita, fecha_cita, hora_cita, estado_cita) "
                    + "OUTPUT INSERTED.numCita "
-                   + "VALUES (?, ?, ?, ?, ?, ?, 1)"; // 1 = pendiente
+                   + "VALUES (?, ?, ?, ?, ?, ?, 1)";
 
         try (Connection con = ConexionBD.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -79,9 +77,8 @@ public class CitaDao {
             ps.setInt(2, c.getCodMedico());
             ps.setInt(3, c.getCodConsultorio());
             ps.setString(4, c.getMotivo());
-
-            ps.setDate(5, java.sql.Date.valueOf(c.getFecha())); // yyyy-MM-dd
-            ps.setTime(6, java.sql.Time.valueOf(c.getHora()));  // HH:mm:ss
+            ps.setDate(5, java.sql.Date.valueOf(c.getFecha()));
+            ps.setTime(6, java.sql.Time.valueOf(c.getHora()));
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) return rs.getInt(1);
@@ -94,7 +91,7 @@ public class CitaDao {
         return null;
     }
 
-    // ===================== LISTAR ACTIVAS PARA TABLA =====================
+    // ESTE METODO SIRVE PARA LISTAR LAS CITAS ACTIVAS (PENDIENTES) EN FORMATO PARA JTable
     public List<Object[]> listarActivasParaTabla() {
 
         List<Object[]> rows = new ArrayList<>();
@@ -108,7 +105,7 @@ public class CitaDao {
                 "JOIN paciente p ON p.codPaciente = c.codPaciente " +
                 "JOIN medico m ON m.codMedico = c.codMedico " +
                 "JOIN consultorio co ON co.codConsultorio = c.codConsultorio " +
-                "WHERE c.estado_cita = 1 " + // solo pendientes
+                "WHERE c.estado_cita = 1 " +
                 "ORDER BY c.fecha_cita DESC, c.hora_cita DESC";
 
         try (Connection con = ConexionBD.conectar();
@@ -135,7 +132,7 @@ public class CitaDao {
         return rows;
     }
 
-    // ===================== CANCELAR CITA POR NUMCITA =====================
+    // ESTE METODO SIRVE PARA CANCELAR UNA CITA POR SU NUMERO
     public boolean cancelar(int numCita) {
 
         String sql = "UPDATE cita SET estado_cita = 0 WHERE numCita = ?";
@@ -153,7 +150,7 @@ public class CitaDao {
         return false;
     }
 
-    // ===================== CONSULTAR CITAS (FILTROS COMBINABLES) =====================
+    // ESTE METODO SIRVE PARA CONSULTAR CITAS SEGUN FILTROS (PACIENTE, MEDICO, CONSULTORIO, FECHA)
     public List<Object[]> consultarParaTabla(Integer codPaciente, Integer codMedico, Integer codConsultorio, String fecha) {
 
         List<Object[]> rows = new ArrayList<>();
@@ -197,7 +194,7 @@ public class CitaDao {
                             rs.getDate("fecha_cita").toString(),
                             rs.getTime("hora_cita").toString(),
                             rs.getString("motivo_cita"),
-                            estadoTexto(rs.getInt("estado_cita")) // ✅ texto
+                            estadoTexto(rs.getInt("estado_cita"))
                     });
                 }
             }
@@ -209,9 +206,7 @@ public class CitaDao {
         return rows;
     }
 
-    // ===================== REPORTES =====================
-
-    // Reporte general (por paciente / por medico+fecha / por consultorio+fecha / por fecha)
+    // ESTE METODO SIRVE PARA SACAR UN REPORTE GENERAL SEGUN FILTROS
     public List<Object[]> reporteGeneral(Integer codPaciente, Integer codMedico, Integer codConsultorio, String fecha) {
 
         List<Object[]> lista = new ArrayList<>();
@@ -265,7 +260,7 @@ public class CitaDao {
         return lista;
     }
 
-    // Reporte: citas pendientes
+    // ESTE METODO SIRVE PARA LISTAR CITAS PENDIENTES PARA UN REPORTE
     public List<Object[]> reportePacientesConPendientes() {
 
         List<Object[]> lista = new ArrayList<>();
@@ -305,8 +300,35 @@ public class CitaDao {
         return lista;
     }
 
-    // Reporte: agenda del día por fecha
+    // ESTE METODO SIRVE PARA OBTENER LA AGENDA DEL DIA SEGUN UNA FECHA
     public List<Object[]> reporteAgendaDelDia(String fecha) {
         return reporteGeneral(null, null, null, fecha);
+    }
+
+    // ESTE METODO SIRVE PARA ACTUALIZAR UNA CITA
+    public boolean actualizar(Cita c) {
+
+        String sql = "UPDATE cita SET codPaciente = ?, codMedico = ?, codConsultorio = ?, " +
+                     "motivo_cita = ?, fecha_cita = ?, hora_cita = ?, estado_cita = ? " +
+                     "WHERE numCita = ?";
+
+        try (Connection con = ConexionBD.conectar();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, c.getCodPaciente());
+            ps.setInt(2, c.getCodMedico());
+            ps.setInt(3, c.getCodConsultorio());
+            ps.setString(4, c.getMotivo());
+            ps.setDate(5, java.sql.Date.valueOf(c.getFecha()));
+            ps.setTime(6, java.sql.Time.valueOf(c.getHora()));
+            ps.setInt(7, c.getEstado());
+            ps.setInt(8, c.getNumCita());
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
